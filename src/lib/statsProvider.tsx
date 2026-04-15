@@ -8,7 +8,6 @@ import React, {
   type ReactNode,
 } from "react";
 import { githubService, type GitHubOrgStats } from "../services/githubService";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 // Time filter types
 export type TimeFilter = "week" | "month" | "year" | "all";
@@ -160,11 +159,6 @@ const isPRInTimeRange = (mergedAt: string, filter: TimeFilter): boolean => {
 export function CommunityStatsProvider({
   children,
 }: CommunityStatsProviderProps) {
-  const {
-    siteConfig: { customFields },
-  } = useDocusaurusContext();
-  const token = customFields?.gitToken || "";
-
   const [loading, setLoading] = useState(false); // Start with false to avoid hourglass
   const [error, setError] = useState<string | null>(null);
   const [githubStarCount, setGithubStarCount] = useState(984); // Placeholder value - updated to match production
@@ -433,17 +427,8 @@ export function CommunityStatsProvider({
 
       setError(null);
 
-      if (!token) {
-        setError(
-          "GitHub token not found. Please set customFields.gitToken in docusaurus.config.js.",
-        );
-        setLoading(false);
-        return;
-      }
-
       try {
         const headers: Record<string, string> = {
-          Authorization: `token ${token}`,
           Accept: "application/vnd.github.v3+json",
         };
 
@@ -497,7 +482,7 @@ export function CommunityStatsProvider({
         setLoading(false);
       }
     },
-    [token, fetchAllOrgRepos, processBatch, cache],
+    [fetchAllOrgRepos, processBatch, cache],
   );
 
   const clearCache = useCallback(() => {

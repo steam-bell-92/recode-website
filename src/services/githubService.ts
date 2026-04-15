@@ -70,18 +70,10 @@ class GitHubService {
 
   // Get headers for GitHub API requests
   private getHeaders(): Record<string, string> {
-    const headers: Record<string, string> = {
+    return {
       Accept: "application/vnd.github.v3+json",
       "Content-Type": "application/json",
     };
-
-    // Add GitHub token if available in environment
-    // Note: In production, you might want to use a server-side proxy to avoid exposing tokens
-    if (typeof window !== "undefined" && (window as any).GITHUB_TOKEN) {
-      headers["Authorization"] = `token ${(window as any).GITHUB_TOKEN}`;
-    }
-
-    return headers;
   }
 
   // === ADDED: setter to toggle anonymous contributors inclusion

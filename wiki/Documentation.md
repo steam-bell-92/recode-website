@@ -573,7 +573,7 @@ Response Example:
 }
 ```
 #### Authentication
-All requests require a GitHub Personal Access Token:
+Authenticated requests should be made from a server-side endpoint or serverless function so the token is never shipped to the browser:
 ```typescript
 const headers: Record<string, string> = {
   Authorization: `token ${YOUR_GITHUB_TOKEN}`,
@@ -588,22 +588,7 @@ Select scopes: public_repo, read:org
 Copy the token (you won't see it again!)
 
 #### Storing the Token:
-In Docusaurus, we store it in docusaurus.config.js:
-```javascript
-module.exports = {
-  customFields: {
-    gitToken: process.env.GITHUB_TOKEN || '',
-  },
-  // ...
-};
-```
-Then access it:
-```typescript
-const {
-  siteConfig: { customFields },
-} = useDocusaurusContext();
-const token = customFields?.gitToken || "";
-```
+Do not store a GitHub token in `docusaurus.config.js` or any other client-bundled config. Keep it in server-side environment variables and call GitHub from a backend endpoint instead.
 #### Error Handling
 **Rate Limit Exceeded (403)**
 
