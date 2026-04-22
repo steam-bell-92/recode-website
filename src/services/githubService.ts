@@ -73,7 +73,9 @@ class GitHubService {
 
   // === ADDED: set the GitHub token (e.g. from Docusaurus customFields.gitToken)
   setToken(token: string): void {
-    this.token = token;
+    if (token && token.trim()) {
+      this.token = token.trim();
+    }
   }
 
   // Get headers for GitHub API requests

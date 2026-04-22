@@ -91,7 +91,7 @@ const DashboardContent: React.FC = () => {
     if (token) {
       githubService.setToken(token);
     }
-  }, [customFields]);
+  }, [customFields?.gitToken]);
 
   // Close dashboard menu when clicking outside
   useEffect(() => {
