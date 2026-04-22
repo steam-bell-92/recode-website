@@ -130,6 +130,7 @@ const DashboardContent: React.FC = () => {
       setDiscussions(discussionsData);
     } catch (error) {
       console.error("Failed to fetch discussions:", error);
+      setDiscussions([]);
       setDiscussionsError(
         error instanceof Error ? error.message : "Failed to load discussions",
       );

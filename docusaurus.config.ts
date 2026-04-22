@@ -248,6 +248,9 @@ const config: Config = {
 
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: "warn",
+    },
   },
 
   // Migrated legacy setting to markdown.hooks.onBrokenMarkdownLinks
@@ -273,9 +276,6 @@ const config: Config = {
       process.env.SHOPIFY_STORE_DOMAIN || "junh9v-gw.myshopify.com",
     SHOPIFY_STOREFRONT_ACCESS_TOKEN:
       process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN,
-    hooks: {
-      onBrokenMarkdownLinks: "warn",
-    },
   },
 };
 

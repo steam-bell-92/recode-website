@@ -64,6 +64,8 @@ class GitHubService {
   private readonly CACHE_KEY = "github_org_stats";
   private readonly CACHE_DURATION = 30 * 60 * 1000; // 30 minutes in milliseconds
   private readonly BASE_URL = "https://api.github.com";
+  private readonly DISCUSSIONS_UNAVAILABLE_MESSAGE =
+    "GitHub Discussions are disabled until a server-side GitHub proxy is configured.";
 
   // === ADDED: include anonymous contributors configurable (default false)
   private includeAnonymousContributors = false;
@@ -74,6 +76,10 @@ class GitHubService {
       Accept: "application/vnd.github.v3+json",
       "Content-Type": "application/json",
     };
+  }
+
+  private canUseGitHubGraphQL(): boolean {
+    return typeof window === "undefined";
   }
 
   // === ADDED: setter to toggle anonymous contributors inclusion
@@ -267,16 +273,16 @@ class GitHubService {
     return totalContributors;
   }
 
-  // === UPDATED: Get discussions count for a specific repository (default: "Support")
-  // Reason: previous code used an org-wide issues search which returned issues, not discussions.
-  // This function uses GraphQL to read repository.discussions.totalCount (repo-specific).
-  // If you need org-wide discussions count, we should iterate all repos and sum totalCount (heavier).
+  // GitHub GraphQL requires authentication, so the browser should not call it directly.
   private async getDiscussionsCount(
     signal?: AbortSignal,
     repoName: string = "Support",
   ): Promise<number> {
+    if (!this.canUseGitHubGraphQL()) {
+      return 0;
+    }
+
     try {
-      // GraphQL query to get discussions totalCount for a repository
       const query = `
         query ($owner: String!, $name: String!) {
           repository(owner: $owner, name: $name) {
@@ -343,11 +349,10 @@ class GitHubService {
         0,
       );
 
-      // Estimate contributors and get discussions count
-      // === UPDATED: getDiscussionsCount now uses GraphQL for a specific repo (default 'Support')
+      // Estimate contributors and fetch discussion stats when a server-side context is available.
       const [totalContributors, discussionsCount] = await Promise.all([
         this.estimateContributors(activeRepos, signal),
-        this.getDiscussionsCount(signal), // default repoName: "Support" (change if you prefer another repo)
+        this.getDiscussionsCount(signal),
       ]);
 
       const stats: GitHubOrgStats = {
@@ -402,11 +407,14 @@ class GitHubService {
     return { cached: true, age, expiresIn };
   }
 
-  // Fetch GitHub Discussions using GraphQL API (existing method kept intact)
   async fetchDiscussions(
     limit: number = 20,
     signal?: AbortSignal,
   ): Promise<GitHubDiscussion[]> {
+    if (!this.canUseGitHubGraphQL()) {
+      throw new Error(this.DISCUSSIONS_UNAVAILABLE_MESSAGE);
+    }
+
     const query = `
       query GetDiscussions($owner: String!, $name: String!, $first: Int!) {
         repository(owner: $owner, name: $name) {
@@ -505,9 +513,7 @@ class GitHubService {
       );
     } catch (error) {
       console.error("Error fetching discussions:", error);
-
-      // Return mock data for development/fallback
-      return this.getMockDiscussions();
+      throw error;
     }
   }
 

@@ -221,9 +221,13 @@ const isPRInTimeRange = (mergedAt: string, filter: TimeFilter): boolean => {
   const prDate = new Date(mergedAt);
   return prDate >= filterDate;
 };
+```
+
 Computed Contributors
 This is where React's useMemo shines:
-typescriptconst contributors = useMemo(() => {
+
+```typescript
+const contributors = useMemo(() => {
   if (!allContributors.length) return [];
   
   const filteredContributors = allContributors
