@@ -65,101 +65,215 @@ const FAQs: React.FC = () => {
         padding: "2rem 0",
       }}
     >
-      <div className="mx-auto px-2 sm:px-4 lg:px-6">
-        <div className="flex flex-col items-center justify-center gap-x-8 gap-y-12 lg:flex-row lg:justify-between xl:gap-28">
-          <div className="w-full">
-            <div className="mb-8 lg:mb-16">
-              <h6
-                className="mb-2 text-center text-lg font-medium lg:text-left"
-                style={{
-                  color: isDark ? "#a78bfa" : "#8b5cf6",
-                  fontWeight: 600,
-                }}
-              >
-                FAQs
-              </h6>
-              <h2
-                className={`text-center text-4xl font-bold lg:text-left ${
-                  isDark ? "text-gray-100" : "text-gray-900"
-                } leading-snug`}
-              >
-                Looking for answers?
-              </h2>
-              <p
-                className={`${
-                  isDark ? "text-gray-400" : "text-gray-600"
-                } text-center lg:text-left`}
-              >
-                Find answers to the most common questions about recode hive.
-              </p>
-            </div>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="w-full">
+          <div className="mb-10 text-center lg:mb-14">
+            <h6
+              className="mb-2 text-lg font-medium"
+              style={{
+                color: isDark ? "#a78bfa" : "#8b5cf6",
+                fontWeight: 600,
+              }}
+            >
+              FAQs
+            </h6>
+            <h2
+              className={`text-5xl font-bold leading-snug md:text-6xl ${
+                isDark ? "text-gray-100" : "text-gray-900"
+              }`}
+            >
+              Looking for answers?
+            </h2>
+            <p
+              className={`mx-auto mt-3 max-w-3xl text-base ${
+                isDark ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
+              Find answers to the most common questions about recode hive.
+            </p>
+          </div>
 
-            {/* Accordion Masonry Columns to prevent sibling expansion */}
-            <div className="columns-1 md:columns-2 md:gap-x-6">
-              {faqData.map((faq, index) => (
-                <motion.div
-                  key={index}
-                  className="accordion mb-4 h-fit break-inside-avoid border-gray-200 pb-4 dark:border-gray-700"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <button
-                    className={`accordion-toggle group flex w-full cursor-pointer items-center justify-between rounded-lg p-4 text-lg font-medium transition-all duration-300 focus:outline-none ${
-                      isDark
-                        ? "text-gray-200 hover:text-indigo-400"
-                        : "text-gray-700 hover:text-indigo-600"
-                    }`}
+          <div className="mx-auto flex max-w-5xl flex-col items-start gap-4 md:flex-row md:gap-6">
+            <div className="flex w-full flex-1 flex-col gap-4 md:gap-6">
+              {faqData.filter((_, index) => index % 2 === 0).map((faq, idx) => {
+                const originalIndex = idx * 2;
+                const isOpen = activeIndex === originalIndex;
+
+                return (
+                  <motion.div
+                    key={originalIndex}
+                    className="accordion overflow-hidden rounded-xl"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
                     style={{
                       background: isDark
-                        ? "rgba(30, 27, 75, 0.6)"
-                        : "rgba(237, 233, 254, 0.6)",
+                        ? "rgba(30, 27, 75, 0.45)"
+                        : "rgba(237, 233, 254, 0.5)",
                       border: isDark
-                        ? "1px solid rgba(139, 92, 246, 0.2)"
-                        : "1px solid rgba(139, 92, 246, 0.3)",
+                        ? "1px solid rgba(139, 92, 246, 0.25)"
+                        : "1px solid rgba(139, 92, 246, 0.35)",
                       backdropFilter: "blur(10px)",
                     }}
-                    onClick={() => toggleAccordion(index)}
                   >
-                    {faq.question}
-                    <motion.span
-                      className="transform transition-transform duration-300"
-                      animate={{ rotate: activeIndex === index ? 180 : 0 }}
-                    >
-                      <FiChevronDown size={22} />
-                    </motion.span>
-                  </button>
-                  <motion.div
-                    className="accordion-content overflow-hidden"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{
-                      height: activeIndex === index ? "auto" : 0,
-                      opacity: activeIndex === index ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  >
-                    <div
-                      className={`mt-2 text-base transition-colors duration-200 ${
-                        isDark ? "text-gray-300" : "text-gray-900"
+                    <button
+                      className={`accordion-toggle group flex w-full cursor-pointer items-center justify-between gap-4 p-4 text-left text-base font-semibold transition-all duration-300 focus:outline-none md:p-5 ${
+                        isDark
+                          ? "text-gray-100 hover:text-indigo-300"
+                          : "text-gray-800 hover:text-indigo-700"
                       }`}
                       style={{
-                        color: isDark ? "#d1d5db" : "#111827",
+                        background: isDark
+                          ? isOpen
+                            ? "rgba(67, 56, 202, 0.18)"
+                            : "rgba(30, 27, 75, 0.45)"
+                          : isOpen
+                            ? "rgba(221, 214, 254, 0.85)"
+                            : "rgba(237, 233, 254, 0.45)",
                       }}
-                      dangerouslySetInnerHTML={{
-                        __html: faq.answer
-                          .replace(
-                            /<strong>/g,
-                            `<strong style="color: ${isDark ? "#f3f4f6" : "#000000"}; font-weight: 600;">`,
-                          )
-                          .replace(
-                            /<a /g,
-                            `<a style="color: ${isDark ? "#818cf8" : "#4f46e5"};" `,
-                          ),
+                      onClick={() => toggleAccordion(originalIndex)}
+                      aria-expanded={isOpen}
+                      aria-controls={`faq-panel-${originalIndex}`}
+                    >
+                      <span>{faq.question}</span>
+                      <motion.span
+                        className="transform transition-transform duration-300"
+                        animate={{ rotate: isOpen ? 180 : 0 }}
+                      >
+                        <FiChevronDown size={22} />
+                      </motion.span>
+                    </button>
+                    <motion.div
+                      id={`faq-panel-${originalIndex}`}
+                      className="accordion-content overflow-hidden"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{
+                        height: isOpen ? "auto" : 0,
+                        opacity: isOpen ? 1 : 0,
                       }}
-                    />
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
+                      <div
+                        className={`text-base transition-colors duration-200 ${
+                          isDark ? "text-gray-300" : "text-gray-900"
+                        }`}
+                        style={{
+                          borderTop: isDark
+                            ? "1px solid rgba(99, 102, 241, 0.3)"
+                            : "1px solid rgba(129, 140, 248, 0.45)",
+                          background: isDark
+                            ? "rgba(17, 24, 39, 0.5)"
+                            : "rgba(255, 255, 255, 0.72)",
+                          color: isDark ? "#d1d5db" : "#111827",
+                          padding: "1rem 1.25rem 1.25rem",
+                        }}
+                        dangerouslySetInnerHTML={{
+                          __html: faq.answer
+                            .replace(
+                              /<strong>/g,
+                              `<strong style="color: ${isDark ? "#f3f4f6" : "#000000"}; font-weight: 600;">`,
+                            )
+                            .replace(
+                              /<a /g,
+                              `<a style="color: ${isDark ? "#818cf8" : "#4f46e5"};" `,
+                            ),
+                        }}
+                      />
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              ))}
+                );
+              })}
+            </div>
+            
+            <div className="flex w-full flex-1 flex-col gap-4 md:gap-6">
+              {faqData.filter((_, index) => index % 2 !== 0).map((faq, idx) => {
+                const originalIndex = idx * 2 + 1;
+                const isOpen = activeIndex === originalIndex;
+
+                return (
+                  <motion.div
+                    key={originalIndex}
+                    className="accordion overflow-hidden rounded-xl"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    style={{
+                      background: isDark
+                        ? "rgba(30, 27, 75, 0.45)"
+                        : "rgba(237, 233, 254, 0.5)",
+                      border: isDark
+                        ? "1px solid rgba(139, 92, 246, 0.25)"
+                        : "1px solid rgba(139, 92, 246, 0.35)",
+                      backdropFilter: "blur(10px)",
+                    }}
+                  >
+                    <button
+                      className={`accordion-toggle group flex w-full cursor-pointer items-center justify-between gap-4 p-4 text-left text-base font-semibold transition-all duration-300 focus:outline-none md:p-5 ${
+                        isDark
+                          ? "text-gray-100 hover:text-indigo-300"
+                          : "text-gray-800 hover:text-indigo-700"
+                      }`}
+                      style={{
+                        background: isDark
+                          ? isOpen
+                            ? "rgba(67, 56, 202, 0.18)"
+                            : "rgba(30, 27, 75, 0.45)"
+                          : isOpen
+                            ? "rgba(221, 214, 254, 0.85)"
+                            : "rgba(237, 233, 254, 0.45)",
+                      }}
+                      onClick={() => toggleAccordion(originalIndex)}
+                      aria-expanded={isOpen}
+                      aria-controls={`faq-panel-${originalIndex}`}
+                    >
+                      <span>{faq.question}</span>
+                      <motion.span
+                        className="transform transition-transform duration-300"
+                        animate={{ rotate: isOpen ? 180 : 0 }}
+                      >
+                        <FiChevronDown size={22} />
+                      </motion.span>
+                    </button>
+                    <motion.div
+                      id={`faq-panel-${originalIndex}`}
+                      className="accordion-content overflow-hidden"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{
+                        height: isOpen ? "auto" : 0,
+                        opacity: isOpen ? 1 : 0,
+                      }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
+                      <div
+                        className={`text-base transition-colors duration-200 ${
+                          isDark ? "text-gray-300" : "text-gray-900"
+                        }`}
+                        style={{
+                          borderTop: isDark
+                            ? "1px solid rgba(99, 102, 241, 0.3)"
+                            : "1px solid rgba(129, 140, 248, 0.45)",
+                          background: isDark
+                            ? "rgba(17, 24, 39, 0.5)"
+                            : "rgba(255, 255, 255, 0.72)",
+                          color: isDark ? "#d1d5db" : "#111827",
+                          padding: "1rem 1.25rem 1.25rem",
+                        }}
+                        dangerouslySetInnerHTML={{
+                          __html: faq.answer
+                            .replace(
+                              /<strong>/g,
+                              `<strong style="color: ${isDark ? "#f3f4f6" : "#000000"}; font-weight: 600;">`,
+                            )
+                            .replace(
+                              /<a /g,
+                              `<a style="color: ${isDark ? "#818cf8" : "#4f46e5"};" `,
+                            ),
+                        }}
+                      />
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </div>

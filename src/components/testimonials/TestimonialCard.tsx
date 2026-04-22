@@ -56,14 +56,14 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       <div className="relative flex h-full flex-col p-6">
         {/* Header */}
         <div className="mb-6 flex items-center gap-4">
-          <div className="relative">
-            <Avatar className="h-16 w-16 border-2 border-gradient-to-r from-purple-500 to-pink-500">
-              <AvatarImage src={avatar} className="object-contain" />
+          <div className="relative shrink-0">
+            <Avatar className="h-16 w-16 overflow-hidden border-2 border-gradient-to-r from-purple-500 to-pink-500 bg-white/90 shadow-md">
+              <AvatarImage src={avatar} className="h-full w-full scale-[2.3] object-cover transition-transform duration-500" />
               <AvatarFallback className="bg-gradient-to-br from-purple-500 to-pink-500 text-white font-semibold">
                 {name.charAt(0)}
               </AvatarFallback>
             </Avatar>
-            <div className="absolute -bottom-1 -right-1 h-5 w-5 rounded-full bg-green-500 border-2 border-white" />
+            <div className="absolute bottom-0 right-0 h-4 w-4 rounded-full border-2 border-white bg-green-500 shadow-sm" />
           </div>
           <div className="flex-1">
             <h3 className={`text-lg font-bold ${
