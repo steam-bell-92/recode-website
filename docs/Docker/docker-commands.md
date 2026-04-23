@@ -543,7 +543,7 @@ docker run --security-opt no-new-privileges nginx
 | `docker network ls` | List all Docker networks |
 | `docker volume ls` | List all Docker volumes |
 | `docker system prune` | Clean up unused images, containers, and networks |
-
+ 
 ### Quick Cleanup
 
 ```bash
