@@ -9,6 +9,7 @@ import {
 } from "@site/src/lib/statsProvider";
 import SlotCounter from "react-slot-counter";
 import { useLocation, useHistory } from "@docusaurus/router";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import {
   githubService,
   GitHubDiscussion,
@@ -30,6 +31,7 @@ import {
   BarChart3,
   ArrowLeft,
   GitFork,
+  RefreshCw,
 } from "lucide-react";
 import NavbarIcon from "@site/src/components/navbar/NavbarIcon";
 import "@site/src/components/discussions/discussions.css";
@@ -65,6 +67,9 @@ const categories: Category[] = [
 const DashboardContent: React.FC = () => {
   const location = useLocation();
   const history = useHistory();
+  const {
+    siteConfig: { customFields },
+  } = useDocusaurusContext();
   const [activeTab, setActiveTab] = useState<
     "home" | "discuss" | "giveaway" | "contributors"
   >("home");
@@ -79,6 +84,14 @@ const DashboardContent: React.FC = () => {
   const [discussionsLoading, setDiscussionsLoading] = useState(true);
   const [discussionsError, setDiscussionsError] = useState<string | null>(null);
   const [showDashboardMenu, setShowDashboardMenu] = useState(false);
+
+  // Initialize GitHub service with token from Docusaurus config
+  useEffect(() => {
+    const token = customFields?.gitToken as string;
+    if (token) {
+      githubService.setToken(token);
+    }
+  }, [customFields?.gitToken]);
 
   // Close dashboard menu when clicking outside
   useEffect(() => {
@@ -137,6 +150,10 @@ const DashboardContent: React.FC = () => {
     } finally {
       setDiscussionsLoading(false);
     }
+  };
+
+  const handleRefreshDiscussions = () => {
+    fetchDiscussions();
   };
 
   // Discussion handlers
@@ -599,6 +616,17 @@ const DashboardContent: React.FC = () => {
                   <option value="oldest">Oldest</option>
                 </select>
                 <button
+                  className="refresh-discussions-btn"
+                  onClick={handleRefreshDiscussions}
+                  disabled={discussionsLoading}
+                  title="Refresh discussions"
+                >
+                  <RefreshCw
+                    size={16}
+                    className={discussionsLoading ? "spinning" : ""}
+                  />
+                </button>
+                <button
                   className="new-discussion-btn"
                   onClick={handleNewDiscussion}
                 >
@@ -630,6 +658,15 @@ const DashboardContent: React.FC = () => {
                 {discussionsError && (
                   <div className="discussions-error-message">
                     <p>{discussionsError}</p>
+                    <p>
+                      <a
+                        href="https://github.com/recodehive/recode-website/discussions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        View discussions on GitHub →
+                      </a>
+                    </p>
                   </div>
                 )}
                 {!discussionsLoading &&

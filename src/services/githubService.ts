@@ -70,12 +70,32 @@ class GitHubService {
   // === ADDED: include anonymous contributors configurable (default false)
   private includeAnonymousContributors = false;
 
+  // === ADDED: stored token for authenticated API calls
+  private token: string = "";
+
+  // === ADDED: set the GitHub token (e.g. from Docusaurus customFields.gitToken)
+  setToken(token: string): void {
+    if (token && token.trim()) {
+      this.token = token.trim();
+    }
+  }
+
   // Get headers for GitHub API requests
   private getHeaders(): Record<string, string> {
-    return {
+    const headers: Record<string, string> = {
       Accept: "application/vnd.github.v3+json",
       "Content-Type": "application/json",
     };
+
+    // Use stored token first, then fall back to window.GITHUB_TOKEN
+    const token =
+      this.token ||
+      (typeof window !== "undefined" ? (window as any).GITHUB_TOKEN : "");
+    if (token) {
+      headers["Authorization"] = `token ${token}`;
+    }
+
+    return headers;
   }
 
   private canUseGitHubGraphQL(): boolean {
@@ -87,7 +107,7 @@ class GitHubService {
       return null;
     }
 
-    return process.env.GITHUB_TOKEN?.trim() || null;
+    return process.env.GITHUB_TOKEN?.trim() || this.token || null;
   }
 
   private getGraphQLHeaders(): Record<string, string> {
