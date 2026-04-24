@@ -270,6 +270,44 @@
   box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
 }
 
+.refresh-discussions-btn {
+  background: var(--ifm-card-background-color);
+  color: var(--ifm-color-emphasis-700);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  padding: 0.75rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.refresh-discussions-btn:hover:not(:disabled) {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  transform: translateY(-1px);
+}
+
+.refresh-discussions-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
 .tab-btn {
   background: var(--ifm-card-background-color);
   border: 2px solid var(--ifm-color-emphasis-200);

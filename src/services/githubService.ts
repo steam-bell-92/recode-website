@@ -68,6 +68,16 @@ class GitHubService {
   // === ADDED: include anonymous contributors configurable (default false)
   private includeAnonymousContributors = false;
 
+  // === ADDED: stored token for authenticated API calls
+  private token: string = "";
+
+  // === ADDED: set the GitHub token (e.g. from Docusaurus customFields.gitToken)
+  setToken(token: string): void {
+    if (token && token.trim()) {
+      this.token = token.trim();
+    }
+  }
+
   // Get headers for GitHub API requests
   private getHeaders(): Record<string, string> {
     const headers: Record<string, string> = {
@@ -75,10 +85,12 @@ class GitHubService {
       "Content-Type": "application/json",
     };
 
-    // Add GitHub token if available in environment
-    // Note: In production, you might want to use a server-side proxy to avoid exposing tokens
-    if (typeof window !== "undefined" && (window as any).GITHUB_TOKEN) {
-      headers["Authorization"] = `token ${(window as any).GITHUB_TOKEN}`;
+    // Use stored token first, then fall back to window.GITHUB_TOKEN
+    const token =
+      this.token ||
+      (typeof window !== "undefined" ? (window as any).GITHUB_TOKEN : "");
+    if (token) {
+      headers["Authorization"] = `token ${token}`;
     }
 
     return headers;
