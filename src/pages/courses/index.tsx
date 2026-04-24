@@ -501,9 +501,10 @@ function CoursesContent() {
               className="mx-auto mb-12 flex max-w-md flex-col justify-center gap-4 sm:flex-row md:mb-16 md:max-w-none md:gap-6"
               variants={fadeIn}
             >
-              <button
+              <a
+                href="/courses/explore"
                 className="courses-button-primary group courses-backdrop-blur relative overflow-hidden rounded-2xl border border-blue-400/20 px-8 py-3 text-base font-bold shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30 md:px-10 md:py-4 md:text-lg"
-                onClick={() => handleAction("enroll")}
+                style={{ display: "inline-flex", textDecoration: "none" }}
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   Explore Courses
@@ -521,7 +522,7 @@ function CoursesContent() {
                     />
                   </svg>
                 </span>
-              </button>
+              </a>
               <button
                 className="courses-button-secondary group relative overflow-hidden rounded-2xl px-8 py-3 text-base font-bold shadow-2xl transition-all duration-300 hover:scale-105 md:px-10 md:py-4 md:text-lg"
                 onClick={() => handleAction("curriculum")}
