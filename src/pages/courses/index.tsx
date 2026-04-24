@@ -503,8 +503,7 @@ function CoursesContent() {
             >
               <a
                 href="/courses/explore"
-                className="courses-button-primary group courses-backdrop-blur relative overflow-hidden rounded-2xl border border-blue-400/20 px-8 py-3 text-base font-bold shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30 md:px-10 md:py-4 md:text-lg"
-                style={{ display: "inline-flex", textDecoration: "none" }}
+                className="courses-button-primary courses-button-link group courses-backdrop-blur relative overflow-hidden rounded-2xl border border-blue-400/20 px-8 py-3 text-base font-bold shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30 md:px-10 md:py-4 md:text-lg"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   Explore Courses

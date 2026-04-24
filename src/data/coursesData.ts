@@ -263,7 +263,7 @@ export const coursesData: Course[] = [
     category: "data-science",
     difficulty: "Beginner",
     duration: "6 hrs",
-    tags: ["Data Visualisation", "Matplotlib", "Seaborn", "Plotly", "Python"],
+    tags: ["Data Visualization", "Matplotlib", "Seaborn", "Plotly", "Python"],
     freePlatforms: [
       {
         name: "Kaggle",
