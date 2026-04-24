@@ -10,7 +10,7 @@ export interface GitHubOrgStats {
   totalRepositories: number;
   totalContributors: number;
   publicRepositories: number;
-  discussionsCount: number;
+  discussionsCount: number | null;
   lastUpdated: number;
 }
 
@@ -80,6 +80,27 @@ class GitHubService {
 
   private canUseGitHubGraphQL(): boolean {
     return typeof window === "undefined";
+  }
+
+  private getGitHubToken(): string | null {
+    if (typeof window !== "undefined") {
+      return null;
+    }
+
+    return process.env.GITHUB_TOKEN?.trim() || null;
+  }
+
+  private getGraphQLHeaders(): Record<string, string> {
+    const token = this.getGitHubToken();
+
+    if (!token) {
+      throw new Error(this.DISCUSSIONS_UNAVAILABLE_MESSAGE);
+    }
+
+    return {
+      ...this.getHeaders(),
+      Authorization: `Bearer ${token}`,
+    };
   }
 
   // === ADDED: setter to toggle anonymous contributors inclusion
@@ -277,9 +298,9 @@ class GitHubService {
   private async getDiscussionsCount(
     signal?: AbortSignal,
     repoName: string = "Support",
-  ): Promise<number> {
+  ): Promise<number | null> {
     if (!this.canUseGitHubGraphQL()) {
-      return 0;
+      return null;
     }
 
     try {
@@ -295,7 +316,7 @@ class GitHubService {
       const resp = await fetch("https://api.github.com/graphql", {
         method: "POST",
         headers: {
-          ...this.getHeaders(),
+          ...this.getGraphQLHeaders(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ query, variables }),
@@ -304,20 +325,20 @@ class GitHubService {
 
       if (!resp.ok) {
         console.warn(`GraphQL request for discussions failed: ${resp.status}`);
-        return 0;
+        return null;
       }
 
       const data = await resp.json();
       if (data.errors) {
         console.warn("GraphQL errors while fetching discussions:", data.errors);
-        return 0;
+        return null;
       }
 
       const count = data?.data?.repository?.discussions?.totalCount || 0;
       return Number(count);
     } catch (error) {
       console.warn("Error fetching discussions count via GraphQL:", error);
-      return 0;
+      return null;
     }
   }
 
@@ -379,7 +400,7 @@ class GitHubService {
         totalRepositories: 0,
         publicRepositories: 0,
         totalContributors: 0,
-        discussionsCount: 0,
+        discussionsCount: null,
         lastUpdated: Date.now(),
       };
 
@@ -414,6 +435,8 @@ class GitHubService {
     if (!this.canUseGitHubGraphQL()) {
       throw new Error(this.DISCUSSIONS_UNAVAILABLE_MESSAGE);
     }
+
+    const graphqlHeaders = this.getGraphQLHeaders();
 
     const query = `
       query GetDiscussions($owner: String!, $name: String!, $first: Int!) {
@@ -463,7 +486,7 @@ class GitHubService {
       const response = await fetch("https://api.github.com/graphql", {
         method: "POST",
         headers: {
-          ...this.getHeaders(),
+          ...graphqlHeaders,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ query, variables }),

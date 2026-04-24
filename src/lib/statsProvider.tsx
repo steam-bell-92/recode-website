@@ -21,7 +21,7 @@ interface ICommunityStatsContext {
   githubForksCountText: string;
   githubReposCount: number;
   githubReposCountText: string;
-  githubDiscussionsCount: number;
+  githubDiscussionsCount: number | null;
   githubDiscussionsCountText: string;
   loading: boolean;
   error: string | null;
@@ -165,7 +165,9 @@ export function CommunityStatsProvider({
   const [githubContributorsCount, setGithubContributorsCount] = useState(467); // Placeholder value - updated to match production
   const [githubForksCount, setGithubForksCount] = useState(1107); // Placeholder value - updated to match production
   const [githubReposCount, setGithubReposCount] = useState(10); // Placeholder value - updated to match production
-  const [githubDiscussionsCount, setGithubDiscussionsCount] = useState(0);
+  const [githubDiscussionsCount, setGithubDiscussionsCount] = useState<
+    number | null
+  >(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
   // Time filter state
@@ -476,7 +478,7 @@ export function CommunityStatsProvider({
           setGithubContributorsCount(140);
           setGithubForksCount(0);
           setGithubReposCount(20);
-          setGithubDiscussionsCount(0);
+          setGithubDiscussionsCount(null);
         }
       } finally {
         setLoading(false);
@@ -562,7 +564,11 @@ export const useCommunityStatsContext = (): ICommunityStatsContext => {
   return context;
 };
 
-export const convertStatToText = (num: number): string => {
+export const convertStatToText = (num: number | null): string => {
+  if (num === null) {
+    return "N/A";
+  }
+
   const hasIntlSupport =
     typeof Intl === "object" && Intl && typeof Intl.NumberFormat === "function";
 
