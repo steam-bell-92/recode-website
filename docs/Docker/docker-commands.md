@@ -398,6 +398,73 @@ docker-compose pull
 
 ---
 
+## Docker Swarm Commands
+
+Docker Swarm is Docker's native clustering and orchestration tool, allowing you to manage a group of Docker hosts as a single virtual system.
+
+### Swarm Initialization & Node Management
+```bash
+# Initialize a swarm
+docker swarm init --advertise-addr <MANAGER-IP>
+
+# Get the join token for workers
+docker swarm join-token worker
+
+# Join a worker node to the swarm
+docker swarm join --token <TOKEN> <MANAGER-IP>:2377
+
+# List nodes in the swarm
+docker node ls
+
+# Promote a worker to manager
+docker node promote <NODE-ID>
+
+# Demote a manager to worker
+docker node demote <NODE-ID>
+```
+
+### Service Management
+```bash
+# Create a service
+docker service create --name my-service --replicas 3 -p 80:80 nginx
+
+# List services
+docker service ls
+
+# List tasks of a service
+docker service ps my-service
+
+# Scale a service
+docker service scale my-service=5
+
+# Update a service (e.g., image version)
+docker service update --image nginx:latest my-service
+
+# Inspect a service
+docker service inspect my-service
+
+# Remove a service
+docker service rm my-service
+```
+
+### Stack Management
+Stacks are the swarm equivalent of Docker Compose, used to manage multi-service applications.
+```bash
+# Deploy a stack from a compose file
+docker stack deploy -c docker-compose.yml my-stack
+
+# List stacks
+docker stack ls
+
+# List services in a stack
+docker stack services my-stack
+
+# Remove a stack
+docker stack rm my-stack
+```
+
+---
+
 ## Advanced Commands
 
 ### Container Inspection
@@ -458,18 +525,25 @@ docker run --security-opt no-new-privileges nginx
 
 | Command | Description |
 |---------|-------------|
-| `docker run` | Create and start container |
+| `docker run` | Create and start a container |
 | `docker ps` | List running containers |
 | `docker images` | List images |
-| `docker build` | Build image from Dockerfile |
-| `docker pull` | Download image |
-| `docker push` | Upload image |
-| `docker exec` | Execute command in container |
-| `docker logs` | View container logs |
-| `docker stop` | Stop container |
-| `docker rm` | Remove container |
-| `docker rmi` | Remove image |
-
+| `docker build` | Build an image from a Dockerfile |
+| `docker pull` | Download an image from a registry |
+| `docker push` | Upload an image to a registry |
+| `docker exec` | Execute a command inside a running container |
+| `docker logs` | View a container's output logs |
+| `docker stop` | Stop a running container |
+| `docker restart` | Restart a container |
+| `docker rm` | Remove a container |
+| `docker rmi` | Remove an image |
+| `docker inspect` | Show detailed info on a Docker object |
+| `docker stats` | Show live resource usage statistics |
+| `docker-compose up` | Start a multi-container application |
+| `docker network ls` | List all Docker networks |
+| `docker volume ls` | List all Docker volumes |
+| `docker system prune` | Clean up unused images, containers, and networks |
+ 
 ### Quick Cleanup
 
 ```bash
@@ -491,6 +565,62 @@ docker volume prune
 
 ---
 
+## Docker Security: Hardening Your Environment
+
+Security is a critical aspect of containerization. Docker provides several built-in mechanisms to secure your applications and infrastructure.
+
+### 1. Secrets Management
+Secrets allow you to store sensitive data (like passwords, API keys, or certificates) outside of your images or source code.
+```bash
+# Create a secret from a file
+docker secret create db_password ./password.txt
+
+# List secrets
+docker secret ls
+
+# Inspect a secret
+docker secret inspect db_password
+
+# Use a secret in a service
+docker service create --name db --secret db_password mariadb
+```
+
+### 2. Docker Content Trust (DCT)
+DCT allows you to use digital signatures for data sent to and received from remote Docker registries. These signatures allow client-side verification of the integrity and publisher of specific image tags.
+```bash
+# Enable Content Trust (shell session)
+export DOCKER_CONTENT_TRUST=1
+
+# Pull only signed images
+docker pull nginx:latest
+```
+
+### 3. Vulnerability Scanning
+Regularly scan your images for known vulnerabilities to ensure your software supply chain is secure.
+```bash
+# Scan an image for vulnerabilities
+docker scan my-image:latest
+```
+
+### 4. User Namespaces & Rootless Docker
+Running Docker in "Rootless Mode" or using User Namespaces adds a layer of security by ensuring that even if a container is compromised, the attacker does not have root access to the host.
+```bash
+# Check if rootless mode is supported
+docker system info | grep "Rootless"
+
+# Run a container with a specific user namespace
+docker run --userns-remap=default -it alpine sh
+```
+
+### 5. Resource Isolation
+Prevent Denial of Service (DoS) attacks by strictly limiting the resources a container can consume.
+```bash
+# Limit memory, CPU, and pids (process limit)
+docker run -m 512m --cpus="0.5" --pids-limit 100 my-app
+```
+
+---
+
 ## Best Practices
 
 ### Command Tips
@@ -502,21 +632,15 @@ docker volume prune
 5. **Use health checks** - Monitor container health
 6. **Clean up regularly** - Remove unused objects
 
-### Security Tips
+### Security Best Practices
 
-```bash
-# Don't run as root
-docker run -u 1000:1000 my-app
+1. **Don't run as root** - Use the `USER` instruction in Dockerfile or `-u` flag.
+2. **Use read-only filesystem** - Prevents attackers from writing to the container disk.
+3. **Scan images regularly** - Use `docker scan` to find vulnerabilities.
+4. **Use Secrets** - Never bake passwords or keys into your images.
+5. **Limit Resources** - Always set memory and CPU limits to prevent host exhaustion.
 
-# Use read-only filesystem when possible
-docker run --read-only my-app
-
-# Drop unnecessary capabilities
-docker run --cap-drop ALL --cap-add NET_BIND_SERVICE my-app
-
-# Use security profiles
-docker run --security-opt apparmor:my-profile my-app
-```
+Refer to the **Docker Security** section above for more detailed commands and implementation details.
 
 ---
 

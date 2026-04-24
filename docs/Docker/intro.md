@@ -56,11 +56,50 @@ CMD ["node", "app.js"]
 ### Registry
 A storage service for Docker images. **Docker Hub** is the most popular—like GitHub for Docker images.
 
-### Volume
-Persistent storage that survives when containers are deleted. Use for databases, logs, and user files.
+### Volumes
+Persistent storage that survives when containers are deleted. Essential for databases, logs, and user-generated content.
 
-### Network
+#### Types of Volumes:
+1. **Named Volumes**: Managed by Docker. Best for persistent data like databases.
+   ```bash
+   # Create a volume
+   docker volume create pg_data
+   # Run container with named volume
+   docker run -d -v pg_data:/var/lib/postgresql/data postgres
+   ```
+2. **Bind Mounts**: Maps a host path to a container path. Best for development.
+   ```bash
+   # Mount current directory to /app
+   docker run -d -v $(pwd):/app node:18-alpine
+   ```
+3. **Tmpfs Mounts**: Stored in host memory (RAM). Best for sensitive or temporary data.
+   ```bash
+   docker run -d --tmpfs /app/cache my-app
+   ```
+
+### Networks
 Allows containers to communicate with each other securely.
+
+#### Network Drivers & Use Cases:
+1. **Bridge (Default)**: Best for standalone containers that need to talk to each other on the same host.
+   - **Use Case**: Connecting a frontend container to a backend container.
+   ```bash
+   docker network create my-net
+   docker run -d --net my-net --name db mysql
+   docker run -d --net my-net --name app my-app
+   ```
+2. **Host**: Removes isolation between host and container (shares host IP).
+   - **Use Case**: High-performance apps where network overhead must be minimal.
+   ```bash
+   docker run -d --network host nginx
+   ```
+3. **Overlay**: Connects multiple Docker daemons together.
+   - **Use Case**: Microservices spread across multiple physical servers (Docker Swarm).
+4. **None**: Disables all networking.
+   - **Use Case**: Secure batch processing jobs with no external access needed.
+   ```bash
+   docker run -d --network none alpine
+   ```
 
 ## Quick Start Workflow
 
@@ -159,4 +198,4 @@ Docker has revolutionized software development and deployment because:
 * **DevOps Integration**
   Perfect fit for CI/CD pipelines, enabling automated testing and deployment workflows.
 
-Ready to dive deeper? Let's explore Docker installation and setup in the next section! 🚀
+Ready to dive deeper? Let's explore Docker installation and setup in the next section! 🚀 
