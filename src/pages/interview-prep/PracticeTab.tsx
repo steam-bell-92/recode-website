@@ -301,7 +301,7 @@ const PracticeTab: React.FC<PracticeTabProps> = ({
                 <h3 className="mb-3 text-xl font-bold text-gray-900 dark:text-white">
                   Technical Deep Dive
                 </h3>
-                <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-200">
+                <p className="mb-4 leading-relaxed text-gray-800 dark:text-gray-200">
                   Explore comprehensive technical resources, coding patterns,
                   and algorithm practice.
                 </p>
@@ -338,7 +338,7 @@ const PracticeTab: React.FC<PracticeTabProps> = ({
                 <h3 className="mb-3 text-xl font-bold text-gray-900 dark:text-white">
                   Behavioral Mastery
                 </h3>
-                <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-200">
+                <p className="mb-4 leading-relaxed text-gray-800 dark:text-gray-200">
                   Master the STAR method and practice storytelling for
                   behavioral interviews.
                 </p>
@@ -376,7 +376,7 @@ const PracticeTab: React.FC<PracticeTabProps> = ({
                 <h3 className="mb-3 text-xl font-bold text-gray-900 dark:text-white">
                   Company Research
                 </h3>
-                <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-200">
+                <p className="mb-4 leading-relaxed text-gray-800 dark:text-gray-200">
                   Research specific companies, their interview processes, and
                   preparation strategies.
                 </p>
@@ -940,7 +940,7 @@ const PracticeTab: React.FC<PracticeTabProps> = ({
                         >
                           ✓
                         </motion.span>
-                        <span className="text-gray-900 dark:text-white">
+                        <span className="text-inherit">
                           Complete Practice
                         </span>
                       </motion.button>
@@ -953,7 +953,7 @@ const PracticeTab: React.FC<PracticeTabProps> = ({
                         completedQuestions.has(question.id)
                           ? "cursor-default border-gray-300 bg-gradient-to-r from-gray-200 to-slate-200 text-gray-800 dark:border-gray-500 dark:from-gray-600 dark:to-slate-600 dark:text-gray-200"
                           : activeSession
-                            ? "cursor-not-allowed border-gray-400 bg-gradient-to-r from-gray-300 to-slate-300 text-gray-500 dark:border-gray-600 dark:from-gray-700 dark:to-slate-700 dark:text-gray-400"
+                            ? "cursor-not-allowed border-gray-400 bg-gradient-to-r from-gray-300 to-slate-300 text-gray-600 dark:border-gray-600 dark:from-gray-700 dark:to-slate-700 dark:text-gray-400"
                             : "border-blue-500/20 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 hover:shadow-blue-500/25"
                       }`}
                       whileHover={
@@ -981,7 +981,7 @@ const PracticeTab: React.FC<PracticeTabProps> = ({
                           >
                             ✓
                           </motion.span>
-                          <span className="text-gray-900 dark:text-white">
+                          <span className="text-inherit">
                             Completed
                           </span>
                         </>
@@ -998,7 +998,7 @@ const PracticeTab: React.FC<PracticeTabProps> = ({
                           >
                             🚀
                           </motion.span>
-                          <span className="text-gray-900 dark:text-white">
+                          <span className="text-inherit">
                             Start Practice
                           </span>
                         </>
@@ -1076,7 +1076,7 @@ const PracticeTab: React.FC<PracticeTabProps> = ({
               <h4 className="mb-3 text-lg font-black text-gray-900 dark:text-white">
                 {feature.title}
               </h4>
-              <p className="text-sm leading-relaxed font-medium text-gray-700 dark:text-gray-200">
+              <p className="text-sm leading-relaxed font-medium text-gray-800 dark:text-gray-200">
                 {feature.desc}
               </p>
             </motion.div>
