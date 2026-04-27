@@ -796,14 +796,31 @@ const sponsors: Sponsor[] = [
     isWeSponsor: true,
   },
   {
-    name: "Aditya",
+    name: "Aditya Singh Rathore",
     image: "https://avatars.githubusercontent.com/u/142787780?v=4",
-    description: "Opensouce Contributor",
+    description: "Data Engineer",
     github: "https://github.com/Adez017",
     linkedin: "https://www.linkedin.com/in/aditya-singh-rathore0017/",
     twitter: "https://x.com/Adez017",
     isWeSponsor: true,
   },
+  {
+    name: "Mehfooj A",
+    image: "https://avatars.githubusercontent.com/u/162735469?v=4",
+    description: "Opensouce Contributor",
+    github: "https://github.com/tsvlgd",
+    linkedin: "https://www.linkedin.com/in/mehfooj-a-b6aa0b243/",
+    isWeSponsor: true,
+  },
+  {
+    name: "Abhash Chakraborty",
+    image: "https://avatars.githubusercontent.com/u/80592559?v=4",
+    description: "Opensouce Contributor",
+    github: "https://github.com/Abhash-Chakraborty",
+    linkedin: "https://www.linkedin.com/in/abhash-chakraborty-b78862247/",
+    isWeSponsor: true,
+  },
+  
 ];
 
 export default sponsors;
