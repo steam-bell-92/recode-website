@@ -124,7 +124,7 @@ const CompaniesTab: React.FC<CompaniesTabProps> = ({ companyTips = [] }) => {
         <h2 className="mb-6 text-5xl font-bold text-gray-900 dark:text-white">
           Company-Specific Interview Prep
         </h2>
-        <p className="text-xl leading-relaxed text-gray-700 dark:text-gray-200">
+        <p className="text-xl leading-relaxed text-gray-800 dark:text-gray-200">
           Get insider knowledge, real interview questions, and proven strategies
           for landing your dream job at top tech companies
         </p>
@@ -150,7 +150,7 @@ const CompaniesTab: React.FC<CompaniesTabProps> = ({ companyTips = [] }) => {
               <span className="mr-4 text-4xl">🏢</span>
               FAANG+ Companies Overview
             </h3>
-            <p className="text-lg text-gray-700 dark:text-gray-200">
+            <p className="text-lg text-gray-800 dark:text-gray-200">
               Navigate the unique interview processes of the world's most
               competitive tech companies
             </p>
@@ -216,7 +216,7 @@ const CompaniesTab: React.FC<CompaniesTabProps> = ({ companyTips = [] }) => {
                 <h4 className="mb-3 text-lg font-bold text-gray-900 dark:text-white">
                   {item.title}
                 </h4>
-                <p className="mb-3 text-sm leading-relaxed text-gray-700 dark:text-gray-200">
+                <p className="mb-3 text-sm leading-relaxed text-gray-800 dark:text-gray-200">
                   {item.description}
                 </p>
                 <div className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
@@ -257,7 +257,7 @@ const CompaniesTab: React.FC<CompaniesTabProps> = ({ companyTips = [] }) => {
                 <div className={`mb-2 text-3xl font-bold ${stat.color}`}>
                   {stat.metric}
                 </div>
-                <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                <div className="flex items-center justify-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                   <span>{stat.icon}</span>
                   {stat.label}
                 </div>
@@ -310,12 +310,12 @@ const CompaniesTab: React.FC<CompaniesTabProps> = ({ companyTips = [] }) => {
         </div>
 
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+          <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-400">
             <Building2 className="h-4 w-4" />
             Showing {filteredCompanies.length} of {companyTips?.length || 0}{" "}
             companies
           </div>
-          <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+          <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400">
             <Star className="h-3 w-3" />
             Updated weekly with latest interview insights
           </div>
@@ -393,14 +393,14 @@ const CompaniesTab: React.FC<CompaniesTabProps> = ({ companyTips = [] }) => {
                           <TrendingUp className="mr-1 h-3 w-3" />
                           High Demand
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
+                        <div className="text-sm text-gray-600 dark:text-gray-400">
                           {company.industry}
                         </div>
                       </div>
                     </div>
 
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <span className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+                      <span className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-400">
                         <Users className="h-4 w-4" />
                         Common roles:
                         {company.roleTypes.map((role, i) => (
@@ -422,7 +422,7 @@ const CompaniesTab: React.FC<CompaniesTabProps> = ({ companyTips = [] }) => {
                           animate={{ rotate: isOpen ? 180 : 0 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <ChevronDown className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                          <ChevronDown className="h-6 w-6 text-gray-700 dark:text-gray-300" />
                         </motion.div>
                       </button>
                     </div>
@@ -525,7 +525,7 @@ const CompaniesTab: React.FC<CompaniesTabProps> = ({ companyTips = [] }) => {
                                       animate={{ rotate: isExpanded ? 180 : 0 }}
                                       transition={{ duration: 0.2 }}
                                     >
-                                      <ChevronDown className="h-5 w-5 flex-shrink-0 text-gray-500" />
+                                      <ChevronDown className="h-5 w-5 flex-shrink-0 text-gray-600" />
                                     </motion.div>
                                   </motion.div>
                                 </CollapsibleTrigger>
@@ -610,7 +610,7 @@ const CompaniesTab: React.FC<CompaniesTabProps> = ({ companyTips = [] }) => {
           className="rounded-xl bg-white py-12 text-center shadow-lg dark:bg-gray-800"
         >
           <div className="mb-4 text-6xl">🔍</div>
-          <p className="mb-4 text-gray-600 dark:text-gray-400">
+          <p className="mb-4 text-gray-700 dark:text-gray-400">
             No companies match your current filters.
           </p>
           <Button
@@ -640,7 +640,7 @@ const CompaniesTab: React.FC<CompaniesTabProps> = ({ companyTips = [] }) => {
               <span className="mr-4 text-5xl">🤝</span>
               Join Our Interview Prep Community
             </h3>
-            <p className="text-xl text-gray-700 dark:text-gray-200">
+            <p className="text-xl text-gray-800 dark:text-gray-200">
               Help build the most comprehensive company interview resource and
               accelerate your career growth
             </p>
@@ -706,7 +706,7 @@ const CompaniesTab: React.FC<CompaniesTabProps> = ({ companyTips = [] }) => {
                 <h4 className="mb-3 text-lg font-bold text-gray-900 dark:text-white">
                   {item.title}
                 </h4>
-                <p className="mb-4 text-sm leading-relaxed text-gray-700 dark:text-gray-200">
+                <p className="mb-4 text-sm leading-relaxed text-gray-800 dark:text-gray-200">
                   {item.description}
                 </p>
                 <div className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
@@ -725,7 +725,7 @@ const CompaniesTab: React.FC<CompaniesTabProps> = ({ companyTips = [] }) => {
                 </Button>
               </Link>
             </motion.div>
-            <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+            <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
               Join 50,000+ developers preparing for their dream jobs
             </p>
           </div>
