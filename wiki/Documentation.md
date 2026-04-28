@@ -583,6 +583,9 @@ const headers: Record<string, string> = {
   Authorization: `token ${YOUR_GITHUB_TOKEN}`,
   Accept: "application/vnd.github.v3+json",
 };
+```
+
+For this site, GitHub Discussions are now fetched dynamically through a server-side `/api/github-discussions` endpoint using a server-side `GITHUB_TOKEN`, and only the sanitized discussion data is exposed to the client bundle.
 
 #### Getting a Token:
 

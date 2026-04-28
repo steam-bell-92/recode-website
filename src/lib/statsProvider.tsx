@@ -7,7 +7,7 @@ import React, {
   useState,
   type ReactNode,
 } from "react";
-import { githubService, type GitHubOrgStats } from "../services/githubService";
+import { githubService } from "../services/githubService";
 
 // Time filter types
 export type TimeFilter = "week" | "month" | "year" | "all";
@@ -435,9 +435,10 @@ export function CommunityStatsProvider({
         };
 
         // Fetch both org stats and repos in parallel
-        const [orgStats, repos] = await Promise.all([
+        const [orgStats, repos, discussionsCount] = await Promise.all([
           githubService.fetchOrganizationStats(signal),
           fetchAllOrgRepos(headers),
+          githubService.fetchDiscussionsCount(signal),
         ]);
 
         // Set org stats immediately
@@ -445,7 +446,7 @@ export function CommunityStatsProvider({
         setGithubContributorsCount(orgStats.totalContributors);
         setGithubForksCount(orgStats.totalForks);
         setGithubReposCount(orgStats.publicRepositories);
-        setGithubDiscussionsCount(orgStats.discussionsCount);
+        setGithubDiscussionsCount(discussionsCount ?? orgStats.discussionsCount);
         setLastUpdated(new Date(orgStats.lastUpdated));
 
         // Process leaderboard data with concurrent processing

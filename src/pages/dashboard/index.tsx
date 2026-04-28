@@ -1,4 +1,4 @@
-import React, { JSX, useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Layout from "@theme/Layout";
 import Head from "@docusaurus/Head";
 import BrowserOnly from "@docusaurus/BrowserOnly";
@@ -9,12 +9,12 @@ import {
 } from "@site/src/lib/statsProvider";
 import SlotCounter from "react-slot-counter";
 import { useLocation, useHistory } from "@docusaurus/router";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import {
-  githubService,
-  GitHubDiscussion,
-} from "@site/src/services/githubService";
 import DiscussionCard from "@site/src/components/discussions/DiscussionCard";
+import { githubService } from "@site/src/services/githubService";
+import type {
+  GitHubDiscussion,
+  GitHubDiscussionsResponse,
+} from "../../types/githubDiscussions";
 import {
   Megaphone,
   Lightbulb,
@@ -24,11 +24,8 @@ import {
   Search,
   TrendingUp,
   Home,
-  Trophy,
   Users,
   Gift,
-  Calendar,
-  BarChart3,
   ArrowLeft,
   GitFork,
   RefreshCw,
@@ -48,13 +45,6 @@ type Category =
   | "show-and-tell"
   | "general";
 
-interface DashboardStats {
-  totalContributors: number;
-  totalRepositories: number;
-  totalStars: number;
-  totalForks: number;
-}
-
 const categories: Category[] = [
   "all",
   "announcements",
@@ -67,9 +57,6 @@ const categories: Category[] = [
 const DashboardContent: React.FC = () => {
   const location = useLocation();
   const history = useHistory();
-  const {
-    siteConfig: { customFields },
-  } = useDocusaurusContext();
   const [activeTab, setActiveTab] = useState<
     "home" | "discuss" | "giveaway" | "contributors"
   >("home");
@@ -84,14 +71,6 @@ const DashboardContent: React.FC = () => {
   const [discussionsLoading, setDiscussionsLoading] = useState(true);
   const [discussionsError, setDiscussionsError] = useState<string | null>(null);
   const [showDashboardMenu, setShowDashboardMenu] = useState(false);
-
-  // Initialize GitHub service with token from Docusaurus config
-  useEffect(() => {
-    const token = customFields?.gitToken as string;
-    if (token) {
-      githubService.setToken(token);
-    }
-  }, [customFields?.gitToken]);
 
   // Close dashboard menu when clicking outside
   useEffect(() => {
@@ -128,7 +107,6 @@ const DashboardContent: React.FC = () => {
     }
   }, [location]);
 
-  // Fetch discussions when discuss tab is active
   useEffect(() => {
     if (activeTab === "discuss") {
       fetchDiscussions();
@@ -139,10 +117,16 @@ const DashboardContent: React.FC = () => {
     try {
       setDiscussionsLoading(true);
       setDiscussionsError(null);
-      const discussionsData = await githubService.fetchDiscussions(20);
-      setDiscussions(discussionsData);
+
+      const data = (await githubService.fetchDiscussions(
+        20,
+      )) as GitHubDiscussionsResponse;
+
+      setDiscussions(data.discussions ?? []);
+      setDiscussionsError(
+        data.available ? null : data.message || "Failed to load discussions",
+      );
     } catch (error) {
-      console.error("Failed to fetch discussions:", error);
       setDiscussions([]);
       setDiscussionsError(
         error instanceof Error ? error.message : "Failed to load discussions",
@@ -289,7 +273,7 @@ const DashboardContent: React.FC = () => {
       });
   };
 
-  const filteredDiscussions = React.useMemo(
+  const filteredDiscussions = useMemo(
     () => getFilteredDiscussions(discussions),
     [discussions, activeDiscussionTab, selectedCategory, searchQuery, sortBy],
   );
@@ -313,42 +297,18 @@ const DashboardContent: React.FC = () => {
   };
 
   const {
-    githubStarCount,
-    githubContributorsCount,
-    githubForksCount,
-    githubReposCount,
+    githubStarCountText,
+    githubContributorsCountText,
+    githubForksCountText,
     loading,
-    error,
   } = useCommunityStatsContext();
-
-  const [dashboardStats, setDashboardStats] = useState<DashboardStats>({
-    totalContributors: 0,
-    totalRepositories: 0,
-    totalStars: 0,
-    totalForks: 0,
-  });
-
-  useEffect(() => {
-    setDashboardStats({
-      totalContributors: githubContributorsCount,
-      totalRepositories: githubReposCount,
-      totalStars: githubStarCount,
-      totalForks: githubForksCount,
-    });
-  }, [
-    githubContributorsCount,
-    githubReposCount,
-    githubStarCount,
-    githubForksCount,
-  ]);
 
   const StatCard: React.FC<{
     icon: React.ReactNode;
     title: string;
-    value: number;
     valueText: string;
     description: string;
-  }> = ({ icon, title, value, valueText, description }) => (
+  }> = ({ icon, title, valueText, description }) => (
     <motion.div
       className="dashboard-stat-card"
       initial={{ opacity: 0, y: 20 }}
@@ -529,29 +489,19 @@ const DashboardContent: React.FC = () => {
                 <StatCard
                   icon={<Star size={24} />}
                   title="Total Stars"
-                  value={dashboardStats.totalStars}
-                  valueText={
-                    useCommunityStatsContext().githubStarCountText || "937"
-                  }
+                  valueText={githubStarCountText || "937"}
                   description="Stars across all our public repositories"
                 />
                 <StatCard
                   icon={<Users size={24} />}
                   title="Contributors"
-                  value={dashboardStats.totalContributors}
-                  valueText={
-                    useCommunityStatsContext().githubContributorsCountText ||
-                    "444"
-                  }
+                  valueText={githubContributorsCountText || "444"}
                   description="Amazing community members"
                 />
                 <StatCard
                   icon={<GitFork size={24} />}
                   title="Forks"
-                  value={dashboardStats.totalForks}
-                  valueText={
-                    useCommunityStatsContext().githubForksCountText || "1.03K"
-                  }
+                  valueText={githubForksCountText || "1.03K"}
                   description="Community contributions"
                 />
               </div>

@@ -100,6 +100,10 @@ declare module "@site/src/services/github" {
   }
 }
 
+declare module "@site/src/services/githubService" {
+  export const githubService: any;
+}
+
 declare module "@site/src/components/ui/button" {
   export const Button: any;
 }
