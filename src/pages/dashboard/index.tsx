@@ -24,11 +24,8 @@ import {
   Search,
   TrendingUp,
   Home,
-  Trophy,
   Users,
   Gift,
-  Calendar,
-  BarChart3,
   ArrowLeft,
   GitFork,
   RefreshCw,
@@ -47,13 +44,6 @@ type Category =
   | "q-a"
   | "show-and-tell"
   | "general";
-
-interface DashboardStats {
-  totalContributors: number;
-  totalRepositories: number;
-  totalStars: number;
-  totalForks: number;
-}
 
 const categories: Category[] = [
   "all",
@@ -312,42 +302,18 @@ const DashboardContent: React.FC = () => {
   };
 
   const {
-    githubStarCount,
-    githubContributorsCount,
-    githubForksCount,
-    githubReposCount,
+    githubStarCountText,
+    githubContributorsCountText,
+    githubForksCountText,
     loading,
-    error,
   } = useCommunityStatsContext();
-
-  const [dashboardStats, setDashboardStats] = useState<DashboardStats>({
-    totalContributors: 0,
-    totalRepositories: 0,
-    totalStars: 0,
-    totalForks: 0,
-  });
-
-  useEffect(() => {
-    setDashboardStats({
-      totalContributors: githubContributorsCount,
-      totalRepositories: githubReposCount,
-      totalStars: githubStarCount,
-      totalForks: githubForksCount,
-    });
-  }, [
-    githubContributorsCount,
-    githubReposCount,
-    githubStarCount,
-    githubForksCount,
-  ]);
 
   const StatCard: React.FC<{
     icon: React.ReactNode;
     title: string;
-    value: number;
     valueText: string;
     description: string;
-  }> = ({ icon, title, value, valueText, description }) => (
+  }> = ({ icon, title, valueText, description }) => (
     <motion.div
       className="dashboard-stat-card"
       initial={{ opacity: 0, y: 20 }}
@@ -528,29 +494,19 @@ const DashboardContent: React.FC = () => {
                 <StatCard
                   icon={<Star size={24} />}
                   title="Total Stars"
-                  value={dashboardStats.totalStars}
-                  valueText={
-                    useCommunityStatsContext().githubStarCountText || "937"
-                  }
+                  valueText={githubStarCountText || "937"}
                   description="Stars across all our public repositories"
                 />
                 <StatCard
                   icon={<Users size={24} />}
                   title="Contributors"
-                  value={dashboardStats.totalContributors}
-                  valueText={
-                    useCommunityStatsContext().githubContributorsCountText ||
-                    "444"
-                  }
+                  valueText={githubContributorsCountText || "444"}
                   description="Amazing community members"
                 />
                 <StatCard
                   icon={<GitFork size={24} />}
                   title="Forks"
-                  value={dashboardStats.totalForks}
-                  valueText={
-                    useCommunityStatsContext().githubForksCountText || "1.03K"
-                  }
+                  valueText={githubForksCountText || "1.03K"}
                   description="Community contributions"
                 />
               </div>
