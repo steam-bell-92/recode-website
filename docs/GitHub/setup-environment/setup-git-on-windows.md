@@ -25,7 +25,7 @@ Github provides two of installation, one the GitHub Desktop and command line by 
     </BrowserWindow>
 
 
-### Step 2: Select your Version you want to insatll.
+### Step 2: Select your Version you want to install.
 
 1. Get your Installer:
 
@@ -50,7 +50,7 @@ Github provides two of installation, one the GitHub Desktop and command line by 
 
 ### Step 3: Understanding the Interface.
 
-Next step, Git Will ask you to install couple of components you can checko on additional icons to add on Desktop and leave the rest as default and click on the Next.
+Next step, Git Will ask you to install couple of components you can check on additional icons to add on Desktop and leave the rest as default and click on the Next.
 
    - 1. The next screen click next , make sure the start folder name is Git.
    - 2. Next option is to choose the default editor  you can use your editor, im using visual studio code. or keep Vim as the default editor
@@ -61,7 +61,7 @@ Next step, Git Will ask you to install couple of components you can checko on ad
     </BrowserWindow>
 
    
-### Step 5:  Adjusting name of the repo setting in Git
+### Step 4:  Adjusting name of the repo setting in Git
 
 This stage it will ask you to Choose a initial branch in new repository, it would be ideal approach to give the second option, as we move further it gives us flexibility to change the intial branch name , like main master, trunk. 
 
@@ -71,9 +71,9 @@ This stage it will ask you to Choose a initial branch in new repository, it woul
     </BrowserWindow>
 
    
-### Step 5:  Adjusting Your path enviornment
+### Step 5:  Adjusting Your path environment
 
-This is where we specify the path enviornment of git, just go with the recommened option which is 2.
+This is where we specify the path environment of git, just go with the recommened option which is 2.
 
      <BrowserWindow url="https://git-scm.com/" bodyStyle={{padding: 0}}>    
      [![Github](./assets/11-git-path-env.png)](https://github.com/sanjay-kv)
@@ -86,7 +86,7 @@ This is where we specify the path enviornment of git, just go with the recommene
 4. ``4`` Next option is to choose the defualt option to use the gith . use the default one which is the Fast- forward and merge option 1.
 5. ``5`` In the Credential helper choose the ``Git Credential Manager`` screen. and click on Next.
 6. ``6`` Enable the extra option , click on the ``Enable the file system Caching`` and click on the Next button. 
-7.  ``7`` In the Next step Screen it will ask you to enable the expiremental support , choose the both the option and click on Install. 
+7.  ``7`` In the Next step Screen it will ask you to enable the expiremental support , choose launch Git Bash and click on Install. 
 
      <BrowserWindow url="https://git-scm.com/" bodyStyle={{padding: 0}}>    
      [![Github](./assets/12-git-final-setup.png)](https://github.com/sanjay-kv)
@@ -115,4 +115,4 @@ Execute the below command to see your current version of git in Git CMD or windo
 
 ## Conclusion
 
-In conclusion, I hope you enjoyed reading this article on “Setting up your Git Enviornment?”. In the next post, will be discussing using Git to create a Repository and clone a project Github.  Signing off Sanjay Viswanathan.
+In conclusion, I hope you enjoyed reading this article on “Setting up your Git environment?”. In the next post, will be discussing using Git to create a Repository and clone a project Github.  Signing off Sanjay Viswanathan.
