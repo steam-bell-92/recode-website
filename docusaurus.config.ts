@@ -293,6 +293,10 @@ const config: Config = {
     SHOPIFY_STOREFRONT_ACCESS_TOKEN:
       process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
       "2503dfbf93132b42e627e7d53b3ba3e9",
+    // EmailJS credentials for Contact Us page (public values only)
+    EMAILJS_PUBLIC_KEY: process.env.EMAILJS_PUBLIC_KEY || "",
+    EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID || "",
+    EMAILJS_TEMPLATE_ID: process.env.EMAILJS_TEMPLATE_ID || "",
     hooks: {
       onBrokenMarkdownLinks: "warn",
     },
