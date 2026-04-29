@@ -178,7 +178,7 @@ const SelectComponent = ({
       className="grid w-full grid-cols-1 overflow-hidden rounded-[30px] shadow-2xl sm:rounded-[50px] md:grid-cols-12"
     >
       <div
-        className={`no-scrollbar col-span-1 flex max-h-[30vh] flex-row items-start justify-start gap-4 overflow-x-auto p-4 md:col-span-4 md:max-h-[70vh] md:flex-col md:gap-6 md:overflow-y-auto md:p-8 ${
+        className={`no-scrollbar col-span-1 flex flex-row items-center justify-start gap-3 overflow-x-auto px-4 py-3 md:col-span-4 md:max-h-[70vh] md:flex-col md:items-start md:gap-6 md:overflow-y-auto md:p-8 ${
           isDark ? "bg-black" : "bg-gray-100"
         }`}
       >
@@ -188,15 +188,15 @@ const SelectComponent = ({
             whileTap={{ scale: 0.98 }}
             key={item.id || index}
             onClick={() => setActiveItem(index)}
-            className={`relative w-40 cursor-pointer rounded-2xl p-2 transition-all duration-300 ease-in-out md:w-4/5 md:rounded-r-full md:p-6 ${
+            className={`relative shrink-0 cursor-pointer rounded-full px-5 py-2.5 transition-all duration-300 ease-in-out md:w-4/5 md:rounded-r-full md:p-6 ${
               activeItem === index
-                ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
+                ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md"
                 : isDark
                   ? "bg-gray-800 text-white hover:bg-gray-700"
                   : "bg-gray-200 text-black hover:bg-gray-300"
             }`}
           >
-            <div className="text-xs font-semibold md:w-10/12 md:text-lg">
+            <div className="whitespace-nowrap text-sm font-medium md:w-10/12 md:whitespace-normal md:text-lg">
               {item.title}
             </div>
             <div
@@ -211,7 +211,7 @@ const SelectComponent = ({
       </div>
 
       <div
-        className={`ourprojects-embed-container relative col-span-1 min-h-[80vh] overflow-hidden p-4 md:col-span-8 md:min-h-[70vh] md:p-8`}
+        className={`ourprojects-embed-container relative col-span-1 min-h-[50vh] overflow-hidden p-4 md:col-span-8 md:min-h-[70vh] md:p-8`}
       >
         {/* Animated Mesh Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-600/30 via-blue-600/30 via-cyan-500/30 to-emerald-500/30">
@@ -288,7 +288,7 @@ const SelectComponent = ({
           className="perspective-1000 relative z-10"
         >
           <div
-            className={`md:hover:rotateY-5 group ourprojects-embed-card h-[78vh] transform overflow-hidden rounded-2xl border-2 shadow-2xl backdrop-blur-md transition-all duration-700 hover:scale-105 sm:h-[80vh] sm:rounded-3xl md:h-[65vh] ${
+            className={`md:hover:rotateY-5 group ourprojects-embed-card h-[45vh] transform overflow-hidden rounded-2xl border-2 shadow-2xl backdrop-blur-md transition-all duration-700 hover:scale-105 sm:h-[50vh] sm:rounded-3xl md:h-[65vh] ${
               isDark
                 ? "border-purple-500/50 bg-gray-900/95 shadow-purple-500/25"
                 : "border-blue-400/50 bg-white/95 shadow-blue-500/25"
