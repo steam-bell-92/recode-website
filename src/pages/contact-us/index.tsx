@@ -1,9 +1,52 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Layout from "@theme/Layout";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import emailjs from "@emailjs/browser";
 import { Mail, MapPin, Clock } from "lucide-react";
 import "./index.css";
 
+type FormStatus = "idle" | "sending" | "success" | "error";
+
 const ContactUs: React.FC = () => {
+  const { siteConfig } = useDocusaurusContext();
+  const formRef = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    const publicKey = siteConfig.customFields?.EMAILJS_PUBLIC_KEY as string;
+    const serviceId = siteConfig.customFields?.EMAILJS_SERVICE_ID as string;
+    const templateId = siteConfig.customFields?.EMAILJS_TEMPLATE_ID as string;
+
+    if (!publicKey || !serviceId || !templateId) {
+      setErrorMessage(
+        "Email service is not configured. Please contact us directly at sanjay@recodehive.com.",
+      );
+      setStatus("error");
+      return;
+    }
+
+    setStatus("sending");
+    setErrorMessage("");
+
+    try {
+      await emailjs.sendForm(serviceId, templateId, formRef.current, {
+        publicKey,
+      });
+      setStatus("success");
+      formRef.current.reset();
+    } catch (err) {
+      console.error("EmailJS send error:", err);
+      setErrorMessage(
+        "Something went wrong. Please try again or email us directly at sanjay@recodehive.com.",
+      );
+      setStatus("error");
+    }
+  };
+
   return (
     <Layout
       title="Contact Us"
@@ -123,88 +166,121 @@ const ContactUs: React.FC = () => {
             <div className="contact-form-section">
               <h2 className="contact-form-title">Send us a message</h2>
 
-              <form className="contact-form">
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="firstName" className="form-label">
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      id="firstName"
-                      name="firstName"
-                      className="form-input"
-                      placeholder="Your first name"
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="lastName" className="form-label">
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      className="form-input"
-                      placeholder="Your last name"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="email" className="form-label">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="form-input"
-                    placeholder="your.email@example.com"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="subject" className="form-label">
-                    Subject
-                  </label>
-                  <select
-                    id="subject"
-                    name="subject"
-                    className="form-select"
-                    required
+              {status === "success" ? (
+                <div className="form-success-message">
+                  <div className="form-success-icon">✅</div>
+                  <h3>Message Sent!</h3>
+                  <p>
+                    Thank you for reaching out. We'll get back to you within
+                    24-48 hours.
+                  </p>
+                  <button
+                    className="submit-button form-success-button"
+                    onClick={() => setStatus("idle")}
                   >
-                    <option value="">Select a subject</option>
-                    <option value="general">General Inquiry</option>
-                    <option value="support">Technical Support</option>
-                    <option value="collaboration">Collaboration</option>
-                    <option value="partnership">Partnership</option>
-                    <option value="feedback">Feedback</option>
-                    <option value="other">Other</option>
-                  </select>
+                    Send Another Message
+                  </button>
                 </div>
+              ) : (
+                <form
+                  ref={formRef}
+                  className="contact-form"
+                  onSubmit={handleSubmit}
+                >
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="firstName" className="form-label">
+                        First Name
+                      </label>
+                      <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        className="form-input"
+                        placeholder="Your first name"
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="lastName" className="form-label">
+                        Last Name
+                      </label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        className="form-input"
+                        placeholder="Your last name"
+                        required
+                      />
+                    </div>
+                  </div>
 
-                <div className="form-group">
-                  <label htmlFor="message" className="form-label">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={6}
-                    className="form-textarea"
-                    placeholder="Tell us more about your inquiry..."
-                    required
-                  ></textarea>
-                </div>
+                  <div className="form-group">
+                    <label htmlFor="email" className="form-label">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      className="form-input"
+                      placeholder="your.email@example.com"
+                      required
+                    />
+                  </div>
 
-                <button type="submit" className="submit-button">
-                  Send Message
-                </button>
-              </form>
+                  <div className="form-group">
+                    <label htmlFor="subject" className="form-label">
+                      Subject
+                    </label>
+                    <select
+                      id="subject"
+                      name="subject"
+                      className="form-select"
+                      required
+                    >
+                      <option value="">Select a subject</option>
+                      <option value="general">General Inquiry</option>
+                      <option value="support">Technical Support</option>
+                      <option value="collaboration">Collaboration</option>
+                      <option value="partnership">Partnership</option>
+                      <option value="feedback">Feedback</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="message" className="form-label">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={6}
+                      className="form-textarea"
+                      placeholder="Tell us more about your inquiry..."
+                      required
+                    ></textarea>
+                  </div>
+
+                  {status === "error" && (
+                    <div className="form-error-message">{errorMessage}</div>
+                  )}
+
+                  <button
+                    type="submit"
+                    className="submit-button"
+                    disabled={status === "sending"}
+                    aria-busy={status === "sending"}
+                    aria-label={
+                      status === "sending" ? "Sending message…" : "Send message"
+                    }
+                  >
+                    {status === "sending" ? "Sending…" : "Send Message"}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
 
