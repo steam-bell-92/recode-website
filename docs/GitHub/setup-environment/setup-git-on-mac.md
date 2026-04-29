@@ -11,23 +11,23 @@ tags:
     development-environment,
     setup-environment,
   ]
-description: In this tutorial, you will learn how to set up your development environment for Git And GitHub.
+description: In this tutorial, you will learn how to set up your development environment for mac system
 ---
 
-Github is a way of version control your software development using Git, Github was founded in 2008 and recently Microsoft has bought the company now Microsoft is the parent organization of Github. Now setting up is very straight forward process , first you need to create a GitHub account online, then Install Git in your system and connect your Git with GitHub. So all the changes will be updated to the GitHub. 
+In the last tutorial you have learned about how to get the setup done in the windows system, in this tutorial we will help you setup on Mac. This may feel very different from the windows setup, as we use homebrew and more mac terminal command to set it up. Now if you are wondering what is Homebrew, it's a package manager for mac.
 
-### Installing Git on Mac
+### Step 1: Installing Git on Mac
 
 There are four ways we can install Github on mac
 
-1. Install Via Homebrew
-2. Xcode Approach
-3. Binary Installer
-4. Building from source
+#### 1. Install Via Homebrew
+#### 2. Xcode Approach
+#### 3. Binary Installer
+#### 4. Building from source
    
 Here in this post, we will be using homebrew to install, Go to the homebrew website, copy the install command, once copied go to the mac terminal copy-paste the code, Mac will ask you to enter the system password, click enter. It may take 2 to 3 minutes to install homebrew
 
-1. Go to the [Git Website](https://brew.sh/) and click on download for windows button.
+1. Go to the [Git Website](https://brew.sh/) and click on download for mac button.
 
     <BrowserWindow url="https://brew.sh/" bodyStyle={{padding: 0}}>    
      [![GitHub](./assets/13-git-mac-terminal.png)](https://git-scm.com/)
