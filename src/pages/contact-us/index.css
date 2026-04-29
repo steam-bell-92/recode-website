@@ -482,6 +482,48 @@ html[data-theme="light"] {
   transform: translateY(0) scale(0.98);
 }
 
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Form feedback messages */
+.form-success-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 2rem 1rem;
+}
+
+.form-success-icon {
+  font-size: 3rem;
+}
+
+.form-success-message h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--contact-text-primary);
+  margin: 0;
+}
+
+.form-success-message p {
+  color: var(--contact-text-muted);
+  margin: 0;
+}
+
+.form-error-message {
+  padding: 0.875rem 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 0.75rem;
+  color: #ef4444;
+  font-size: 0.9375rem;
+}
+
 /* Additional Resources */
 .contact-resources {
   text-align: center;
