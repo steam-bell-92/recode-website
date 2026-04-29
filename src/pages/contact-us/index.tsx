@@ -40,8 +40,12 @@ const ContactUs: React.FC = () => {
       formRef.current.reset();
     } catch (err) {
       console.error("EmailJS send error:", err);
+      const detail =
+        err && typeof err === "object" && "text" in err
+          ? ` (${(err as { status?: number; text?: string }).status ?? ""}: ${(err as { text?: string }).text ?? ""})`
+          : "";
       setErrorMessage(
-        "Something went wrong. Please try again or email us directly at sanjay@recodehive.com.",
+        `Something went wrong${detail}. Please try again or email us directly at sanjay@recodehive.com.`,
       );
       setStatus("error");
     }
