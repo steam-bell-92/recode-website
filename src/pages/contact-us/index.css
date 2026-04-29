@@ -515,6 +515,10 @@ html[data-theme="light"] {
   margin: 0;
 }
 
+.form-success-button {
+  margin-top: 1rem;
+}
+
 .form-error-message {
   padding: 0.875rem 1rem;
   background: rgba(239, 68, 68, 0.1);

@@ -38,7 +38,8 @@ const ContactUs: React.FC = () => {
       });
       setStatus("success");
       formRef.current.reset();
-    } catch (_err) {
+    } catch (err) {
+      console.error("EmailJS send error:", err);
       setErrorMessage(
         "Something went wrong. Please try again or email us directly at sanjay@recodehive.com.",
       );
@@ -174,8 +175,7 @@ const ContactUs: React.FC = () => {
                     24-48 hours.
                   </p>
                   <button
-                    className="submit-button"
-                    style={{ marginTop: "1rem" }}
+                    className="submit-button form-success-button"
                     onClick={() => setStatus("idle")}
                   >
                     Send Another Message
@@ -272,6 +272,10 @@ const ContactUs: React.FC = () => {
                     type="submit"
                     className="submit-button"
                     disabled={status === "sending"}
+                    aria-busy={status === "sending"}
+                    aria-label={
+                      status === "sending" ? "Sending message…" : "Send message"
+                    }
                   >
                     {status === "sending" ? "Sending…" : "Send Message"}
                   </button>
