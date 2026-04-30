@@ -36,7 +36,7 @@ Whether you're completely new or need a refresher, these guides will walk you th
 
 ## Need help?
 
-- Join our Discord for real-time help: https://discord.gg/Yxv9RA3r  
+- Join our Discord for real-time help: https://discord.gg/dh3TA8U55Q  
 - Browse our GitHub org: https://github.com/recodehive
 
 ---
