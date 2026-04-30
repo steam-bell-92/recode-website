@@ -4,7 +4,7 @@ import Layout from "@theme/Layout";
 import Head from "@docusaurus/Head";
 import { motion } from "framer-motion";
 import Link from "@docusaurus/Link";
-import { useColorMode } from "@docusaurus/theme-common";
+import { useSafeColorMode } from "../../utils/useSafeColorMode";
 import clsx from "clsx";
 import OverviewTab from "./OverviewTab";
 import TechnicalTab from "./TechnicalTab";
@@ -1519,8 +1519,7 @@ function InterviewPrepContent({
   companyTips: any[];
   mockInterviewQuestions: any[];
 }) {
-  const { colorMode } = useColorMode();
-  const isDark = colorMode === "dark";
+  const { isDark } = useSafeColorMode();
 
   return (
     <>
@@ -1542,12 +1541,20 @@ function InterviewPrepContent({
       >
         {/* Hero Section */}
         <motion.section
-          className="hero-section relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 px-4 py-20 text-center text-white"
+          className="hero-section relative overflow-hidden px-4 py-20 text-center"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
+          style={{
+            background: isDark
+              ? "linear-gradient(135deg, #1e3a5f 0%, #2d1b4e 50%, #1a1a2e 100%)"
+              : "linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #1e40af 100%)",
+          }}
         >
-          <div className="absolute inset-0 bg-black/20"></div>
+          <div
+            className="absolute inset-0"
+            style={{ background: "rgba(0, 0, 0, 0.2)" }}
+          ></div>
           <div className="relative z-10 mx-auto max-w-4xl">
             <motion.h1
               className="mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-5xl font-bold text-transparent md:text-6xl"
@@ -1568,13 +1575,22 @@ function InterviewPrepContent({
             >
               <button
                 onClick={() => setActiveTab("practice")}
-                className="transform rounded-lg bg-white px-8 py-4 font-semibold text-blue-600 shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-50"
+                className="transform rounded-lg px-8 py-4 font-semibold shadow-lg transition-all duration-300 hover:scale-105"
+                style={{
+                  backgroundColor: "#ffffff",
+                  color: isDark ? "#1e3a8f" : "#2563eb",
+                }}
               >
                 Start Practice
               </button>
               <button
                 onClick={() => setActiveTab("technical")}
-                className="rounded-lg border-2 border-white px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-white hover:text-blue-600"
+                className="rounded-lg border-2 px-8 py-4 font-semibold transition-all duration-300 hover:opacity-90"
+                style={{
+                  borderColor: "#ffffff",
+                  color: "#ffffff",
+                  backgroundColor: "transparent",
+                }}
               >
                 Browse Resources
               </button>
@@ -1583,8 +1599,19 @@ function InterviewPrepContent({
         </motion.section>
 
         {/* Navigation Tabs */}
-        <div className="sticky top-0 z-40 border-b border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-900">
-          <div className="mx-auto max-w-6xl px-4">
+        <div
+          className="sticky top-0 z-40 border-b shadow-sm"
+          style={{
+            borderColor: isDark ? "#374151" : "#e5e7eb",
+            backgroundColor: isDark ? "#111827" : "#ffffff",
+          }}
+        >
+          <div
+            className="mx-auto max-w-6xl px-4"
+            style={{
+              backgroundColor: isDark ? "#111827" : "#ffffff",
+            }}
+          >
             <nav className="flex space-x-8 overflow-x-auto">
               {[
                 { id: "overview", label: "Overview", icon: "📋" },
@@ -1598,9 +1625,14 @@ function InterviewPrepContent({
                   onClick={() => setActiveTab(tab.id as any)}
                   className={`flex items-center space-x-2 border-b-2 px-2 py-4 text-sm font-medium transition-colors ${
                     activeTab === tab.id
-                      ? "interview-prep-nav-tab-active border-blue-500 text-blue-600 dark:text-blue-400"
-                      : "interview-prep-nav-tab-inactive border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                      ? "border-blue-500"
+                      : "border-transparent"
                   }`}
+                  style={{
+                    color: activeTab === tab.id
+                      ? (isDark ? "#60a5fa" : "#2563eb")
+                      : (isDark ? "#9ca3af" : "#6b7280"),
+                  }}
                 >
                   <span className="text-inherit">{tab.icon}</span>
                   <span className="text-inherit">{tab.label}</span>
@@ -1611,7 +1643,13 @@ function InterviewPrepContent({
         </div>
 
         {/* Tab Content */}
-        <div className="interview-prep-page mx-auto max-w-6xl px-4 py-12">
+        <div
+          className="mx-auto max-w-6xl px-4 py-12"
+          style={{
+            backgroundColor: isDark ? "#0f172a" : "#ffffff",
+            minHeight: "100vh",
+          }}
+        >
           {/* Overview Tab */}
           {activeTab === "overview" && (
             <OverviewTab
@@ -1664,20 +1702,30 @@ function InterviewPrepContent({
 
         {/* Call to Action */}
         <motion.section
-          className="cta-section bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 px-4 py-20 text-center text-white"
+          className="cta-section px-4 py-20 text-center"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
+          style={{
+            background: isDark
+              ? "linear-gradient(135deg, #1e3a5f 0%, #2d1b4e 50%, #1a1a2e 100%)"
+              : "linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #1e40af 100%)",
+          }}
         >
           <div className="mx-auto max-w-4xl">
             <motion.h2
               className="mb-6 text-4xl font-bold md:text-5xl"
               variants={fadeIn}
+              style={{ color: "#ffffff" }}
             >
               Ready to Land Your Dream Job?
             </motion.h2>
-            <motion.p className="mb-8 text-xl text-blue-100" variants={fadeIn}>
+            <motion.p
+              className="mb-8 text-xl"
+              variants={fadeIn}
+              style={{ color: "#bfdbfe" }}
+            >
               Join thousands of developers who have successfully prepared for
               interviews with recode hive
             </motion.p>
@@ -1687,13 +1735,22 @@ function InterviewPrepContent({
             >
               <Link
                 to="/get-started"
-                className="transform rounded-lg bg-white px-8 py-4 font-semibold text-blue-600 shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-50"
+                className="transform rounded-lg px-8 py-4 font-semibold shadow-lg transition-all duration-300 hover:scale-105"
+                style={{
+                  backgroundColor: "#ffffff",
+                  color: isDark ? "#1e3a8f" : "#2563eb",
+                }}
               >
                 Start Preparing Now
               </Link>
               <Link
                 to="/community"
-                className="rounded-lg border-2 border-white bg-white px-8 py-4 font-semibold text-blue-500 transition-all duration-300 hover:bg-white hover:text-blue-600"
+                className="rounded-lg border-2 px-8 py-4 font-semibold transition-all duration-300 hover:opacity-90"
+                style={{
+                  borderColor: "#ffffff",
+                  color: "#ffffff",
+                  backgroundColor: "transparent",
+                }}
               >
                 Join Community
               </Link>

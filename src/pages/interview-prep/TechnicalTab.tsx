@@ -63,7 +63,7 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
             <h2 className="mb-6 text-4xl font-bold text-gray-900 dark:text-white">
               Master Technical Interviews
             </h2>
-            <p className="text-lg text-gray-700 dark:text-gray-200">
+            <p className="text-lg text-gray-800 dark:text-gray-200">
               Technical interviews are the cornerstone of software engineering
               hiring. They evaluate your problem-solving abilities, coding
               skills, and understanding of computer science fundamentals.
@@ -79,7 +79,7 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
               <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
                 Problem Solving
               </h3>
-              <p className="text-sm text-gray-700 dark:text-gray-200">
+              <p className="text-sm text-gray-800 dark:text-gray-200">
                 Develop systematic approaches to break down complex problems
                 into manageable components.
               </p>
@@ -91,7 +91,7 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
               <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
                 Pattern Recognition
               </h3>
-              <p className="text-sm text-gray-700 dark:text-gray-200">
+              <p className="text-sm text-gray-800 dark:text-gray-200">
                 Learn to identify common patterns and apply proven techniques to
                 solve similar problems efficiently.
               </p>
@@ -103,7 +103,7 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
               <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
                 Communication
               </h3>
-              <p className="text-sm text-gray-700 dark:text-gray-200">
+              <p className="text-sm text-gray-800 dark:text-gray-200">
                 Master the art of explaining your approach, discussing
                 trade-offs, and collaborating with interviewers.
               </p>
@@ -254,7 +254,7 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
 
                           {/* Subtopics */}
                           <div className="mb-4">
-                            <h6 className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <h6 className="mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">
                               Key Topics:
                             </h6>
                             <div className="flex flex-wrap gap-1">
@@ -262,7 +262,7 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
                                 (topic, topicIndex) => (
                                   <span
                                     key={topicIndex}
-                                    className="rounded bg-gray-100 px-2 py-1 text-xs text-gray-600 dark:bg-gray-700 dark:text-gray-300"
+                                    className="rounded bg-gray-100 px-2 py-1 text-xs text-gray-700 dark:bg-gray-700 dark:text-gray-300"
                                   >
                                     {topic}
                                   </span>
@@ -273,7 +273,7 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
 
                           {/* Resources */}
                           <div className="space-y-2">
-                            <h6 className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <h6 className="text-sm font-medium text-gray-800 dark:text-gray-300">
                               Practice Resources:
                             </h6>
                             {subcategory.resources.map(
@@ -317,13 +317,13 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
                 <h4 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">
                   {platform.name}
                 </h4>
-                <p className="mb-3 text-sm text-gray-700 dark:text-gray-200">
+                <p className="mb-3 text-sm text-gray-800 dark:text-gray-200">
                   {platform.description}
                 </p>
                 <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                   {platform.problems}
                 </div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">
+                <div className="text-xs text-gray-600 dark:text-gray-400">
                   Problems Available
                 </div>
               </div>
@@ -348,14 +348,14 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
               </div>
 
               <div className="mb-6">
-                <h5 className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                <h5 className="mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">
                   Key Features:
                 </h5>
                 <ul className="space-y-1">
                   {platform.features.map((feature, featureIndex) => (
                     <li
                       key={featureIndex}
-                      className="flex items-center text-xs text-gray-600 dark:text-gray-400"
+                      className="flex items-center text-xs text-gray-700 dark:text-gray-400"
                     >
                       <span className="mr-2 h-1 w-1 rounded-full bg-blue-500"></span>
                       {feature}
@@ -398,7 +398,7 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
                 <h4 className="font-semibold text-gray-900 dark:text-white">
                   Start with Easy Problems
                 </h4>
-                <p className="text-sm text-gray-700 dark:text-gray-200">
+                <p className="text-sm text-gray-800 dark:text-gray-200">
                   Build confidence and understand patterns before tackling
                   harder challenges.
                 </p>
@@ -412,7 +412,7 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
                 <h4 className="font-semibold text-gray-900 dark:text-white">
                   Practice Consistently
                 </h4>
-                <p className="text-sm text-gray-700 dark:text-gray-200">
+                <p className="text-sm text-gray-800 dark:text-gray-200">
                   Solve 1-2 problems daily rather than cramming before
                   interviews.
                 </p>
@@ -426,7 +426,7 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
                 <h4 className="font-semibold text-gray-900 dark:text-white">
                   Focus on Patterns
                 </h4>
-                <p className="text-sm text-gray-700 dark:text-gray-200">
+                <p className="text-sm text-gray-800 dark:text-gray-200">
                   Learn common problem-solving patterns like two pointers,
                   sliding window, etc.
                 </p>
@@ -442,7 +442,7 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
                 <h4 className="font-semibold text-gray-900 dark:text-white">
                   Time Yourself
                 </h4>
-                <p className="text-sm text-gray-700 dark:text-gray-200">
+                <p className="text-sm text-gray-800 dark:text-gray-200">
                   Practice under time constraints to simulate real interview
                   conditions.
                 </p>
@@ -456,7 +456,7 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
                 <h4 className="font-semibold text-gray-900 dark:text-white">
                   Explain Your Thinking
                 </h4>
-                <p className="text-sm text-gray-700 dark:text-gray-200">
+                <p className="text-sm text-gray-800 dark:text-gray-200">
                   Practice verbalizing your approach and reasoning process.
                 </p>
               </div>
@@ -469,7 +469,7 @@ const TechnicalTab: React.FC<TechnicalTabProps> = ({
                 <h4 className="font-semibold text-gray-900 dark:text-white">
                   Review Solutions
                 </h4>
-                <p className="text-sm text-gray-700 dark:text-gray-200">
+                <p className="text-sm text-gray-800 dark:text-gray-200">
                   Study optimal solutions and alternative approaches after
                   solving problems.
                 </p>

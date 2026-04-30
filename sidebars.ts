@@ -227,17 +227,7 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
-    {
-      type: "category",
-      label: "🎓 Google Student Ambassador",
-      className: "custom-sidebar-gsa",
-      items: [
-        "Google-Student-Ambassador/part-1-getting-started/gsa-part-1",
-        "Google-Student-Ambassador/part-2-application-process/gsa-part-2",
-        "Google-Student-Ambassador/part-3-eligibility/gsa-part-3",
-        "Google-Student-Ambassador/part-4-gemini-pro/gsa-part-4",
-      ],
-    },
+  
     {
       type: "category",
       label: "🔧 Technical",

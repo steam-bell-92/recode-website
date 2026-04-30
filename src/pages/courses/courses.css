@@ -373,6 +373,16 @@
   box-shadow: var(--courses-shadow-lg);
 }
 
+/* Allow <a> elements styled as the primary button to look/behave correctly */
+a.courses-button-link {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+a.courses-button-link:hover {
+  text-decoration: none;
+}
+
 .courses-button-primary:hover {
   background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
   transform: translateY(-3px);

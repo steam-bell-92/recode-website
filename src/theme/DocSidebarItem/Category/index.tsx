@@ -70,11 +70,6 @@ const getIcon = (
     return <Code2 className={`${styles.categoryIcon} ${styles.pythonIcon}`} />;
   } else if (label.includes("Next.js") || className?.includes("nextjs")) {
     return <Zap className={`${styles.categoryIcon} ${styles.nextjsIcon}`} />;
-  } else if (
-    label.includes("Google Student Ambassador") ||
-    className?.includes("gsa")
-  ) {
-    return <School className={`${styles.categoryIcon} ${styles.gsaIcon}`} />;
   } else if (label.includes("Docker") || className?.includes("docker")) {
     return <Container className={`${styles.categoryIcon} ${styles.dockerIcon}`} />;
   } else if (label.includes("Technical") || className?.includes("technical")) {
@@ -169,11 +164,6 @@ function DocSidebarItemCategory({
       return "custom-sidebar-sql";
     } else if (label.includes("Next.js") || className?.includes("nextjs")) {
       return "custom-sidebar-nextjs";
-    } else if (
-      label.includes("Google Student Ambassador") ||
-      className?.includes("gsa")
-    ) {
-      return "custom-sidebar-gsa";
     } else if (label.includes("Docker") || className?.includes("docker")) {
       return "custom-sidebar-docker";
     } else if (

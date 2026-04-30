@@ -13,10 +13,6 @@ import {
   Crown,
   Star,
   Award,
-  Clock,
-  Users,
-  TrendingUp,
-  Medal,
   ArrowLeft,
 } from "lucide-react";
 import "../dashboard.css";
@@ -297,7 +293,7 @@ const giveawayStyles = `
   display: block;
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--ifm-color-primary);
+  color: var(--ifm-color-emphasis-900);
 }
 
 .giveaway-leaderboard-card.rank-1 .stat-value,
@@ -420,7 +416,7 @@ const giveawayStyles = `
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: inherit;
-  color: var(--ifm-color-primary);
+  color: var(--ifm-color-emphasis-900);
   min-height: 60px;
   display: flex;
   align-items: center;
@@ -563,10 +559,9 @@ const GiveawayPage: React.FC = () => {
   const StatCard: React.FC<{
     icon: string;
     title: string;
-    value: number;
     valueText: string;
     description: string;
-  }> = ({ icon, title, value, valueText, description }) => (
+  }> = ({ icon, title, valueText, description }) => (
     <motion.div
       className="dashboard-stat-card"
       initial={{ opacity: 0, y: 20 }}
@@ -754,25 +749,22 @@ const GiveawayPage: React.FC = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="dashboard-stats-grid">
+            <div className="">
               <StatCard
                 icon="⏳"
                 title="Next Giveaway"
-                value={5}
                 valueText="5 Days"
                 description="Time remaining"
               />
               <StatCard
                 icon="🎫"
                 title="Entries"
-                value={leaderboard.length}
                 valueText={leaderboard.length.toString()}
                 description="Total participants"
               />
               <StatCard
                 icon="🏅"
                 title="Total Winners"
-                value={3}
                 valueText="3"
                 description="Winners per giveaway"
               />
