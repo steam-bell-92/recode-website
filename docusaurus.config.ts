@@ -19,6 +19,7 @@ const config: Config = {
   projectName: "recode-website",
 
   onBrokenLinks: "throw",
+  // onBrokenMarkdownLinks moved to markdown.hooks
 
   // Google Analytics and Theme Scripts
   scripts: [
@@ -264,10 +265,9 @@ const config: Config = {
 
   markdown: {
     mermaid: true,
-    hooks: {
-      onBrokenMarkdownLinks: "warn",
-    },
   },
+
+  // Migrated legacy setting to markdown.hooks.onBrokenMarkdownLinks
 
   themes: ["@docusaurus/theme-mermaid"],
 
@@ -284,16 +284,22 @@ const config: Config = {
     ],
   ],
 
+  // ✅ Add this customFields object to expose the token to the client-side
   customFields: {
+    gitToken: process.env.DOCUSAURUS_GIT_TOKEN,
     // Shopify credentials for merch store
     SHOPIFY_STORE_DOMAIN:
       process.env.SHOPIFY_STORE_DOMAIN || "junh9v-gw.myshopify.com",
     SHOPIFY_STOREFRONT_ACCESS_TOKEN:
-      process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+      process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
+      "2503dfbf93132b42e627e7d53b3ba3e9",
     // EmailJS credentials for Contact Us page (public values only)
     EMAILJS_PUBLIC_KEY: process.env.EMAILJS_PUBLIC_KEY || "",
     EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID || "",
     EMAILJS_TEMPLATE_ID: process.env.EMAILJS_TEMPLATE_ID || "",
+    hooks: {
+      onBrokenMarkdownLinks: "warn",
+    },
   },
 };
 

@@ -5,9 +5,6 @@ import reactPlugin from "eslint-plugin-react";
 
 export default [
   {
-    ignores: ["node_modules/", "build/", ".docusaurus/", "static/", "dist/"],
-  },
-  {
     files: ["**/*.{ts,tsx}"],
     ignores: ["node_modules/", "build/", ".docusaurus/", "static/", "dist/"],
     languageOptions: {

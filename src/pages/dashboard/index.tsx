@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { JSX, useEffect, useState } from "react";
 import Layout from "@theme/Layout";
 import Head from "@docusaurus/Head";
 import BrowserOnly from "@docusaurus/BrowserOnly";
@@ -9,12 +9,12 @@ import {
 } from "@site/src/lib/statsProvider";
 import SlotCounter from "react-slot-counter";
 import { useLocation, useHistory } from "@docusaurus/router";
-import DiscussionCard from "@site/src/components/discussions/DiscussionCard";
-import { githubService } from "@site/src/services/githubService";
-import type {
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import {
+  githubService,
   GitHubDiscussion,
-  GitHubDiscussionsResponse,
-} from "../../types/githubDiscussions";
+} from "@site/src/services/githubService";
+import DiscussionCard from "@site/src/components/discussions/DiscussionCard";
 import {
   Megaphone,
   Lightbulb,
@@ -57,6 +57,9 @@ const categories: Category[] = [
 const DashboardContent: React.FC = () => {
   const location = useLocation();
   const history = useHistory();
+  const {
+    siteConfig: { customFields },
+  } = useDocusaurusContext();
   const [activeTab, setActiveTab] = useState<
     "home" | "discuss" | "giveaway" | "contributors"
   >("home");
@@ -71,6 +74,14 @@ const DashboardContent: React.FC = () => {
   const [discussionsLoading, setDiscussionsLoading] = useState(true);
   const [discussionsError, setDiscussionsError] = useState<string | null>(null);
   const [showDashboardMenu, setShowDashboardMenu] = useState(false);
+
+  // Initialize GitHub service with token from Docusaurus config
+  useEffect(() => {
+    const token = customFields?.gitToken as string;
+    if (token) {
+      githubService.setToken(token);
+    }
+  }, [customFields?.gitToken]);
 
   // Close dashboard menu when clicking outside
   useEffect(() => {
@@ -107,6 +118,7 @@ const DashboardContent: React.FC = () => {
     }
   }, [location]);
 
+  // Fetch discussions when discuss tab is active
   useEffect(() => {
     if (activeTab === "discuss") {
       fetchDiscussions();
@@ -117,17 +129,10 @@ const DashboardContent: React.FC = () => {
     try {
       setDiscussionsLoading(true);
       setDiscussionsError(null);
-
-      const data = (await githubService.fetchDiscussions(
-        20,
-      )) as GitHubDiscussionsResponse;
-
-      setDiscussions(data.discussions ?? []);
-      setDiscussionsError(
-        data.available ? null : data.message || "Failed to load discussions",
-      );
+      const discussionsData = await githubService.fetchDiscussions(20);
+      setDiscussions(discussionsData);
     } catch (error) {
-      setDiscussions([]);
+      console.error("Failed to fetch discussions:", error);
       setDiscussionsError(
         error instanceof Error ? error.message : "Failed to load discussions",
       );
@@ -273,7 +278,7 @@ const DashboardContent: React.FC = () => {
       });
   };
 
-  const filteredDiscussions = useMemo(
+  const filteredDiscussions = React.useMemo(
     () => getFilteredDiscussions(discussions),
     [discussions, activeDiscussionTab, selectedCategory, searchQuery, sortBy],
   );
