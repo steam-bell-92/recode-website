@@ -7,6 +7,24 @@ dotenv.config();
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+const algoliaAppId = process.env.ALGOLIA_APP_ID?.trim();
+const algoliaSearchApiKey = process.env.ALGOLIA_SEARCH_API_KEY?.trim();
+const algoliaIndexName = process.env.ALGOLIA_INDEX_NAME?.trim();
+
+const hasAlgoliaDocSearch = Boolean(
+  algoliaAppId && algoliaSearchApiKey && algoliaIndexName,
+);
+
+const hasPartialAlgoliaDocSearchConfig = Boolean(
+  algoliaAppId || algoliaSearchApiKey || algoliaIndexName,
+);
+
+if (hasPartialAlgoliaDocSearchConfig && !hasAlgoliaDocSearch) {
+  console.warn(
+    "Algolia DocSearch is partially configured. Set ALGOLIA_APP_ID, ALGOLIA_SEARCH_API_KEY, and ALGOLIA_INDEX_NAME to enable navbar search.",
+  );
+}
+
 const config: Config = {
   title: "recode hive",
   tagline: "Learn, Build & Grow with Open Source",
@@ -208,11 +226,14 @@ const config: Config = {
             },
           ],
         },
-        // Search disabled until Algolia is properly configured
-        // {
-        //   type: "search",
-        //   position: "right",
-        // },
+        ...(hasAlgoliaDocSearch
+          ? [
+              {
+                type: "search" as const,
+                position: "right" as const,
+              },
+            ]
+          : []),
         {
           type: "html",
           position: "right",
@@ -247,21 +268,16 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
-    // Disable Algolia search until properly configured
-    // algolia: {
-    //   appId: "YOUR_APP_ID",
-    //   apiKey: "YOUR_SEARCH_API_KEY",
-    //   indexName: "YOUR_INDEX_NAME",
-    //   contextualSearch: true,
-    //   externalUrlRegex: "external\\.com|domain\\.com",
-    //   replaceSearchResultPathname: {
-    //     from: "/docs/",
-    //     to: "/",
-    //   },
-    //   searchParameters: {},
-    //   searchPagePath: "search",
-    //   insights: false,
-    // },
+    ...(hasAlgoliaDocSearch
+      ? {
+          algolia: {
+            appId: algoliaAppId!,
+            apiKey: algoliaSearchApiKey!,
+            indexName: algoliaIndexName!,
+            contextualSearch: true,
+          },
+        }
+      : {}),
   } satisfies Preset.ThemeConfig,
 
   markdown: {
@@ -280,7 +296,7 @@ const config: Config = {
         max: 1030,
         min: 640,
         steps: 2,
-        disableInDev: false,
+        disableInDev: true,
       },
     ],
   ],
