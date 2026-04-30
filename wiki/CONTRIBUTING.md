@@ -222,7 +222,7 @@ git push origin feature/your-feature-name
 
 Need assistance? We're here to help!
 
-- **Discord:** Join our [Discord server](https://discord.gg/Yxv9RA3r)
+- **Discord:** Join our [Discord server](https://discord.gg/dh3TA8U55Q)
 - **GitHub Discussions:** Ask questions in [Discussions](https://github.com/recodehive/recode-website/discussions)
 - **Issues:** Check existing [issues](https://github.com/recodehive/recode-website/issues) or create a new one
 

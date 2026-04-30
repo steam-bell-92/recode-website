@@ -46,7 +46,7 @@ The recode hive GitHub organization ([github.com/recodehive](https://github.com/
 recode hive has 600+ GitHub followers and contributors from all over the world. Here is how to become part of it:
 
 1. **Join the GitHub Organization** — raise an issue using the [Invite Link](https://github.com/Recode-Hive/Support/issues/new?assignees=&labels=invite+me+to+the+community&projects=&template=invitation.yml&title=Please+invite+me+to+the+Recode-Hive+GitHub+Community+Organization) and you'll receive an email invitation.
-2. **Join Discord** — chat with members, ask questions, and find help in real time at [discord.gg/Yxv9RA3r](https://discord.gg/Yxv9RA3r).
+2. **Join Discord** — chat with members, ask questions, and find help in real time at [discord.gg/dh3TA8U55Q](https://discord.gg/dh3TA8U55Q).
 3. **Practice open source** — make your first PR in the [Opensource-practice](https://github.com/recodehive/Opensource-practice) repository.
 4. **Subscribe to the newsletter** — get career insights delivered to your inbox at [recodehive.substack.com](https://recodehive.substack.com/).
 

@@ -75,7 +75,7 @@ const contributionSections: ContributionSection[] = [
       "Share resources, tutorials, and best practices to help others grow.",
     ],
     links: [
-      { text: "Discord", url: "https://discord.gg/b6ffxhXRNH" },
+      { text: "Discord", url: "https://discord.gg/dh3TA8U55Q" },
       {
         text: "Whatsapp",
         url: "https://chat.whatsapp.com/Izl2yfbFlmY8CExjnIpNkX?mode=ems_copy_t",
@@ -273,15 +273,14 @@ export default function CommunityPage(): React.ReactElement {
                     <motion.div
                       key={section.id}
                       id={section.id}
-                      className={`contribution-section ${
-                        (
+                      className={`contribution-section ${(
                           isMobile
                             ? activeSections.includes(section.id)
                             : selectedSection === section.id
                         )
                           ? "selected"
                           : ""
-                      }`}
+                        }`}
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.1 * index }}

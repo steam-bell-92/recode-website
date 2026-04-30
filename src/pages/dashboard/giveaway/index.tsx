@@ -743,32 +743,30 @@ const GiveawayPage: React.FC = () => {
 
           {/* Giveaway Stats Grid */}
           <motion.section
-            className="dashboard-stats-section"
+            className="dashboard-stats-section grid grid-cols-1 md:grid-cols-3 gap-4 flex-wrap"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="">
-              <StatCard
-                icon="⏳"
-                title="Next Giveaway"
-                valueText="5 Days"
-                description="Time remaining"
-              />
-              <StatCard
-                icon="🎫"
-                title="Entries"
-                valueText={leaderboard.length.toString()}
-                description="Total participants"
-              />
-              <StatCard
-                icon="🏅"
-                title="Total Winners"
-                valueText="3"
-                description="Winners per giveaway"
-              />
-            </div>
+            <StatCard
+              icon="⏳"
+              title="Next Giveaway"
+              valueText="5 Days"
+              description="Time remaining"
+            />
+            <StatCard
+              icon="🎫"
+              title="Entries"
+              valueText={leaderboard.length.toString()}
+              description="Total participants"
+            />
+            <StatCard
+              icon="🏅"
+              title="Total Winners"
+              valueText="3"
+              description="Winners per giveaway"
+            />
           </motion.section>
 
           {/* Giveaway Leaderboard */}

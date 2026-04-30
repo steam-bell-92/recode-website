@@ -27,7 +27,7 @@ const faqData = [
   {
     question: "How can I contribute as a beginner?",
     answer:
-      "We've designed our community specifically with beginners in mind! Contributing to open-source can seem intimidating, but we provide a supportive environment for learning.<br><br><strong>Beginner-Friendly Steps:</strong><br>1. Start with our <a href='/docs/GitHub/GitHub-basics' class='text-indigo-600 hover:text-indigo-800 underline'>GitHub Basics guide</a><br>2. Join our <a href='https://discord.gg/Yxv9RA3r' target='_blank' rel='noopener noreferrer' class='text-indigo-600 hover:text-indigo-800 underline'>Discord community</a> for support<br>3. Look for 'good first issue' labels in our repositories<br>4. Follow our <a href='https://github.com/recodehive/recode-website#getting-started' target='_blank' rel='noopener noreferrer' class='text-indigo-600 hover:text-indigo-800 underline'>step-by-step contribution guide</a><br><br>🎯 <a href='/docs/GitHub/GitHub-basics/first-opensource-code' class='text-indigo-600 hover:text-indigo-800 underline'>Make your first open-source contribution</a>",
+      "We've designed our community specifically with beginners in mind! Contributing to open-source can seem intimidating, but we provide a supportive environment for learning.<br><br><strong>Beginner-Friendly Steps:</strong><br>1. Start with our <a href='/docs/GitHub/GitHub-basics' class='text-indigo-600 hover:text-indigo-800 underline'>GitHub Basics guide</a><br>2. Join our <a href='https://discord.gg/dh3TA8U55Q' target='_blank' rel='noopener noreferrer' class='text-indigo-600 hover:text-indigo-800 underline'>Discord community</a> for support<br>3. Look for 'good first issue' labels in our repositories<br>4. Follow our <a href='https://github.com/recodehive/recode-website#getting-started' target='_blank' rel='noopener noreferrer' class='text-indigo-600 hover:text-indigo-800 underline'>step-by-step contribution guide</a><br><br>🎯 <a href='/docs/GitHub/GitHub-basics/first-opensource-code' class='text-indigo-600 hover:text-indigo-800 underline'>Make your first open-source contribution</a>",
   },
   {
     question: "How can I earn from this recode hive organisation?",
@@ -78,16 +78,14 @@ const FAQs: React.FC = () => {
               FAQs
             </h6>
             <h2
-              className={`text-5xl font-bold leading-snug md:text-6xl ${
-                isDark ? "text-gray-100" : "text-gray-900"
-              }`}
+              className={`text-5xl font-bold leading-snug md:text-6xl ${isDark ? "text-gray-100" : "text-gray-900"
+                }`}
             >
               Looking for answers?
             </h2>
             <p
-              className={`mx-auto mt-3 max-w-3xl text-base ${
-                isDark ? "text-gray-400" : "text-gray-600"
-              }`}
+              className={`mx-auto mt-3 max-w-3xl text-base ${isDark ? "text-gray-400" : "text-gray-600"
+                }`}
             >
               Find answers to the most common questions about recode hive.
             </p>
@@ -117,11 +115,10 @@ const FAQs: React.FC = () => {
                     }}
                   >
                     <button
-                      className={`accordion-toggle group flex w-full cursor-pointer items-center justify-between gap-4 p-4 text-left text-base font-semibold transition-all duration-300 focus:outline-none md:p-5 ${
-                        isDark
+                      className={`accordion-toggle group flex w-full cursor-pointer items-center justify-between gap-4 p-4 text-left text-base font-semibold transition-all duration-300 focus:outline-none md:p-5 ${isDark
                           ? "text-gray-100 hover:text-indigo-300"
                           : "text-gray-800 hover:text-indigo-700"
-                      }`}
+                        }`}
                       style={{
                         background: isDark
                           ? isOpen
@@ -154,9 +151,8 @@ const FAQs: React.FC = () => {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
                       <div
-                        className={`text-base transition-colors duration-200 ${
-                          isDark ? "text-gray-300" : "text-gray-900"
-                        }`}
+                        className={`text-base transition-colors duration-200 ${isDark ? "text-gray-300" : "text-gray-900"
+                          }`}
                         style={{
                           borderTop: isDark
                             ? "1px solid rgba(99, 102, 241, 0.3)"
@@ -184,7 +180,7 @@ const FAQs: React.FC = () => {
                 );
               })}
             </div>
-            
+
             <div className="flex w-full flex-1 flex-col gap-4 md:gap-6">
               {faqData.filter((_, index) => index % 2 !== 0).map((faq, idx) => {
                 const originalIndex = idx * 2 + 1;
@@ -208,11 +204,10 @@ const FAQs: React.FC = () => {
                     }}
                   >
                     <button
-                      className={`accordion-toggle group flex w-full cursor-pointer items-center justify-between gap-4 p-4 text-left text-base font-semibold transition-all duration-300 focus:outline-none md:p-5 ${
-                        isDark
+                      className={`accordion-toggle group flex w-full cursor-pointer items-center justify-between gap-4 p-4 text-left text-base font-semibold transition-all duration-300 focus:outline-none md:p-5 ${isDark
                           ? "text-gray-100 hover:text-indigo-300"
                           : "text-gray-800 hover:text-indigo-700"
-                      }`}
+                        }`}
                       style={{
                         background: isDark
                           ? isOpen
@@ -245,9 +240,8 @@ const FAQs: React.FC = () => {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
                       <div
-                        className={`text-base transition-colors duration-200 ${
-                          isDark ? "text-gray-300" : "text-gray-900"
-                        }`}
+                        className={`text-base transition-colors duration-200 ${isDark ? "text-gray-300" : "text-gray-900"
+                          }`}
                         style={{
                           borderTop: isDark
                             ? "1px solid rgba(99, 102, 241, 0.3)"

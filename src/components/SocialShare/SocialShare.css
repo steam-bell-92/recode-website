@@ -1,0 +1,65 @@
+.blog-post-share-section {
+  margin: 3rem 0;
+  padding: 2rem;
+  background: rgba(var(--ifm-color-primary-rgb), 0.05);
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid rgba(var(--ifm-color-primary-rgb), 0.1);
+}
+
+.share-title {
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ifm-font-color-base);
+}
+
+.share-buttons-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.share-btn-large {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  color: white !important;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.share-btn-large:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  filter: brightness(1.1);
+}
+
+.share-btn-large.twitter {
+  background-color: #000000;
+}
+
+.share-btn-large.linkedin {
+  background-color: #0077b5;
+}
+
+.share-btn-large.facebook {
+  background-color: #1877f2;
+}
+
+@media (max-width: 576px) {
+  .share-buttons-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .share-btn-large {
+    justify-content: center;
+  }
+}
