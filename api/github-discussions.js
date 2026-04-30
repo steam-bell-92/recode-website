@@ -125,15 +125,11 @@ async function fetchGitHubDiscussions(token, limit) {
   };
 }
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   const token = getToken();
 
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=300, stale-while-revalidate=600",
-  );
-
   if (!token) {
+    res.setHeader("Cache-Control", "no-store");
     res.status(503).json({
       available: false,
       message: UNAVAILABLE_MESSAGE,
@@ -147,8 +143,13 @@ export default async function handler(req, res) {
   try {
     const limit = parseLimit(req.query.limit);
     const data = await fetchGitHubDiscussions(token, limit);
+    res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=300, stale-while-revalidate=600",
+    );
     res.status(200).json(data);
   } catch (error) {
+    res.setHeader("Cache-Control", "no-store");
     res.status(502).json({
       available: false,
       message:
@@ -161,3 +162,5 @@ export default async function handler(req, res) {
     });
   }
 }
+
+module.exports = handler;

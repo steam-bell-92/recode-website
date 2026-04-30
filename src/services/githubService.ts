@@ -252,10 +252,7 @@ class GitHubService {
     }
 
     try {
-      const [, repositories] = await Promise.all([
-        this.fetchOrganizationInfo(signal),
-        this.fetchAllRepositories(signal),
-      ]);
+      const repositories = await this.fetchAllRepositories(signal);
 
       // Filter out archived repositories for active stats
       const activeRepos = repositories.filter((repo) => !repo.archived);
@@ -341,10 +338,25 @@ class GitHubService {
       },
     );
 
-    const payload = (await response.json()) as GitHubDiscussionsResponse;
+    const contentType = response.headers.get("Content-Type") || "";
+    const isJsonResponse = contentType.includes("application/json");
+    const fallbackMessage = `Failed to fetch GitHub discussions: ${response.status} ${response.statusText}`;
+    let payload: GitHubDiscussionsResponse | null = null;
+
+    if (isJsonResponse) {
+      try {
+        payload = (await response.json()) as GitHubDiscussionsResponse;
+      } catch {
+        throw new Error(`${fallbackMessage} (invalid JSON response)`);
+      }
+    }
 
     if (!response.ok) {
-      throw new Error(payload.message || "Failed to fetch GitHub discussions.");
+      throw new Error(payload?.message || fallbackMessage);
+    }
+
+    if (!payload) {
+      throw new Error(`${fallbackMessage} (non-JSON response)`);
     }
 
     return payload;

@@ -591,7 +591,7 @@ For this site, GitHub Discussions are now fetched dynamically through a server-s
 
 Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
 Generate new token
-Select scopes: public_repo, read:org
+Select scopes: public_repo, read:org, read:discussion
 Copy the token (you won't see it again!)
 
 #### Storing the Token:
