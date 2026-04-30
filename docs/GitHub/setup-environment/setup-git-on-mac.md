@@ -18,6 +18,10 @@ In the last tutorial you have learned about how to get the setup done in the win
 
 ### Step 1: Installing Git on Mac
 
+  ```html title="Homebrew official website"
+https://brew.sh/
+    ```
+
 There are four ways we can install Github on mac
 
 #### 1. Install Via Homebrew
@@ -34,23 +38,31 @@ Here in this post, we will be using homebrew to install, Go to the homebrew webs
     </BrowserWindow>
 
 
-### Step 2: Select your Version you want to insatll.
+### Step 2:  Install Git via Homebrew
 
 1. Once Installed use the below command to check version of the brew on terminal brew -v
 
-Now you can install git on mac system by entering below command on terminal, In future if you want to update the version of git installed on mac or windows use the git clone https://github.com/git/git command on terminal or git bash. 
+Now you can install git on mac system by entering below command on terminal, In future if you want to update the version of git installed on mac use the "git clone brew upgrade" gitcommand on terminal or git bash. 
 
-
-  ```html title="create a new repository on the command line"
-brew install git-gui
+  ```html title="Copy paste this Homebrew command"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     ```
 
-     - **Installer:** Get the Installer
-    <BrowserWindow url="https://git-scm.com/downloads/win" bodyStyle={{padding: 0}}>    
-     [![GitHub](./assets/7-git-installer.png)](https://git-scm.com/downloads/win)
+  ```html title="To install git on Mac System"
+brew install git
+ ```
+
+ ### Step 3: Run the commands in the Mac Terminal
+Copy paste the command the terminal shows, one by one on the terminal and press enter to execute it, Once all has been done, enter brew help to see if homebrew has been succesfully installed or not. 
+    <BrowserWindow url="https://git-scm.com/downloads/Mac" bodyStyle={{padding: 0}}>    
+     [![GitHub](./assets/06-brew-help.png)](https://git-scm.com/downloads/mac)
     </BrowserWindow>
 
+Once the setup is completed, open your visual studio code and run the command brew -v or git -v to see whethere the git has been installed or not. 
 
+  ```html title="To Check git on Mac System"
+brew -v
+ ```
 ## Conclusion
 
-In conclusion, I hope you enjoyed reading this article on “Setting up your Git Enviornment?”. In the next post, will be discussing using Git to create a Repository and clone a project Github.  Signing off Sanjay Viswanathan.
+In conclusion, I hope you enjoyed reading this article on “Installing Git On Mac?”. In the next post, will be discussing using Git commands and indepth usage on Github.  Signing off Sanjay Viswanathan.
