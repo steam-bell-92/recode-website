@@ -5,10 +5,10 @@
 /* For widths below 768px: give the card extra height and reduce chrome */
 @media (max-width: 767px) {
   .ourprojects-embed-container {
-    min-height: 82vh !important;
+    min-height: 50vh !important;
   }
   .ourprojects-embed-card {
-    height: 82vh !important;
+    height: 50vh !important;
     border-radius: 1.25rem !important; /* smaller radius to fit */
   }
   .ourprojects-iframe {
@@ -31,10 +31,10 @@
 /* For ultra small widths below 360px (covers 320px phones) */
 @media (max-width: 360px) {
   .ourprojects-embed-container {
-    min-height: 88vh !important;
+    min-height: 55vh !important;
   }
   .ourprojects-embed-card {
-    height: 88vh !important;
+    height: 55vh !important;
   }
   .ourprojects-iframe {
     height: 250% !important;
@@ -47,10 +47,10 @@
 /* Safety for <320px specifically if needed */
 @media (max-width: 320px) {
   .ourprojects-embed-container {
-    min-height: 92vh !important;
+    min-height: 60vh !important;
   }
   .ourprojects-embed-card {
-    height: 92vh !important;
+    height: 60vh !important;
   }
   .ourprojects-iframe {
     height: 280% !important;
