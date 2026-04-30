@@ -221,13 +221,9 @@ const isPRInTimeRange = (mergedAt: string, filter: TimeFilter): boolean => {
   const prDate = new Date(mergedAt);
   return prDate >= filterDate;
 };
-```
-
 Computed Contributors
 This is where React's useMemo shines:
-
-```typescript
-const contributors = useMemo(() => {
+typescriptconst contributors = useMemo(() => {
   if (!allContributors.length) return [];
   
   const filteredContributors = allContributors
@@ -577,25 +573,37 @@ Response Example:
 }
 ```
 #### Authentication
-Authenticated requests should be made from a server-side endpoint or serverless function so the token is never shipped to the browser:
+All requests require a GitHub Personal Access Token:
 ```typescript
 const headers: Record<string, string> = {
   Authorization: `token ${YOUR_GITHUB_TOKEN}`,
   Accept: "application/vnd.github.v3+json",
 };
-```
-
-For this site, GitHub Discussions are now fetched dynamically through a server-side `/api/github-discussions` endpoint using a server-side `GITHUB_TOKEN`, and only the sanitized discussion data is exposed to the client bundle.
 
 #### Getting a Token:
 
 Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
 Generate new token
-Select scopes: public_repo, read:org, read:discussion
+Select scopes: public_repo, read:org
 Copy the token (you won't see it again!)
 
 #### Storing the Token:
-Do not store a GitHub token in `docusaurus.config.ts/js` or any other client-bundled config. Keep it in server-side environment variables and call GitHub from a backend endpoint instead.
+In Docusaurus, we store it in docusaurus.config.js:
+```javascript
+module.exports = {
+  customFields: {
+    gitToken: process.env.GITHUB_TOKEN || '',
+  },
+  // ...
+};
+```
+Then access it:
+```typescript
+const {
+  siteConfig: { customFields },
+} = useDocusaurusContext();
+const token = customFields?.gitToken || "";
+```
 #### Error Handling
 **Rate Limit Exceeded (403)**
 
