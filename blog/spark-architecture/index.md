@@ -67,7 +67,7 @@ Let's break down each of these and understand how they collaborate.
 The Driver Program is where your Spark application begins and ends. When you write a Spark program and run it, you're essentially creating a driver program. Here's what makes it the brain of the operation:
 
 **What the Driver Does:**
-- Contains your main() function and defines RDDs and operations on them
+- Contains your main() function and defines RDDs(Resilient Distributed Datasets) and operations on them
 - Converts your high-level operations into a DAG (Directed Acyclic Graph) of tasks
 - Schedules tasks across the cluster
 - Coordinates with the cluster manager to get resources
@@ -75,7 +75,7 @@ The Driver Program is where your Spark application begins and ends. When you wri
 
 **Think of it this way:** If your Spark application were a restaurant, the Driver would be the head chef who takes orders (your code), breaks them down into specific cooking tasks, assigns those tasks to kitchen staff (executors), and ensures everything comes together for the final dish.
 
-The driver runs in its own JVM process and maintains all the metadata about your Spark application throughout its lifetime.
+The driver runs in its own JVM(Java Virtual Machine) process and maintains all the metadata about your Spark application throughout its lifetime.
 
 ### 2. Cluster Manager: The Resource Referee
 
