@@ -7,8 +7,7 @@ import React, {
   useState,
   type ReactNode,
 } from "react";
-import { githubService, type GitHubOrgStats } from "../services/githubService";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { githubService } from "../services/githubService";
 
 // Time filter types
 export type TimeFilter = "week" | "month" | "year" | "all";
@@ -22,7 +21,7 @@ interface ICommunityStatsContext {
   githubForksCountText: string;
   githubReposCount: number;
   githubReposCountText: string;
-  githubDiscussionsCount: number;
+  githubDiscussionsCount: number | null;
   githubDiscussionsCountText: string;
   loading: boolean;
   error: string | null;
@@ -160,18 +159,15 @@ const isPRInTimeRange = (mergedAt: string, filter: TimeFilter): boolean => {
 export function CommunityStatsProvider({
   children,
 }: CommunityStatsProviderProps) {
-  const {
-    siteConfig: { customFields },
-  } = useDocusaurusContext();
-  const token = customFields?.gitToken || "";
-
   const [loading, setLoading] = useState(false); // Start with false to avoid hourglass
   const [error, setError] = useState<string | null>(null);
   const [githubStarCount, setGithubStarCount] = useState(984); // Placeholder value - updated to match production
   const [githubContributorsCount, setGithubContributorsCount] = useState(467); // Placeholder value - updated to match production
   const [githubForksCount, setGithubForksCount] = useState(1107); // Placeholder value - updated to match production
   const [githubReposCount, setGithubReposCount] = useState(10); // Placeholder value - updated to match production
-  const [githubDiscussionsCount, setGithubDiscussionsCount] = useState(0);
+  const [githubDiscussionsCount, setGithubDiscussionsCount] = useState<
+    number | null
+  >(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
   // Time filter state
@@ -433,24 +429,16 @@ export function CommunityStatsProvider({
 
       setError(null);
 
-      if (!token) {
-        setError(
-          "GitHub token not found. Please set customFields.gitToken in docusaurus.config.js.",
-        );
-        setLoading(false);
-        return;
-      }
-
       try {
         const headers: Record<string, string> = {
-          Authorization: `token ${token}`,
           Accept: "application/vnd.github.v3+json",
         };
 
         // Fetch both org stats and repos in parallel
-        const [orgStats, repos] = await Promise.all([
+        const [orgStats, repos, discussionsCount] = await Promise.all([
           githubService.fetchOrganizationStats(signal),
           fetchAllOrgRepos(headers),
+          githubService.fetchDiscussionsCount(signal),
         ]);
 
         // Set org stats immediately
@@ -458,7 +446,7 @@ export function CommunityStatsProvider({
         setGithubContributorsCount(orgStats.totalContributors);
         setGithubForksCount(orgStats.totalForks);
         setGithubReposCount(orgStats.publicRepositories);
-        setGithubDiscussionsCount(orgStats.discussionsCount);
+        setGithubDiscussionsCount(discussionsCount ?? orgStats.discussionsCount);
         setLastUpdated(new Date(orgStats.lastUpdated));
 
         // Process leaderboard data with concurrent processing
@@ -491,13 +479,13 @@ export function CommunityStatsProvider({
           setGithubContributorsCount(140);
           setGithubForksCount(0);
           setGithubReposCount(20);
-          setGithubDiscussionsCount(0);
+          setGithubDiscussionsCount(null);
         }
       } finally {
         setLoading(false);
       }
     },
-    [token, fetchAllOrgRepos, processBatch, cache],
+    [fetchAllOrgRepos, processBatch, cache],
   );
 
   const clearCache = useCallback(() => {
@@ -577,7 +565,11 @@ export const useCommunityStatsContext = (): ICommunityStatsContext => {
   return context;
 };
 
-export const convertStatToText = (num: number): string => {
+export const convertStatToText = (num: number | null): string => {
+  if (num === null) {
+    return "N/A";
+  }
+
   const hasIntlSupport =
     typeof Intl === "object" && Intl && typeof Intl.NumberFormat === "function";
 

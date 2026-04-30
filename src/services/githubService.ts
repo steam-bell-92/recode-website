@@ -1,8 +1,9 @@
-// GitHub API service for fetching organization metrics
-// Uses localStorage for caching to reduce API calls
-// 1) discussions count used org-wide search — replaced with repo-specific GraphQL query (default repo: "Support").
-// 2) anonymous contributors (anon=true) made configurable (default: false).
-// Changes are annotated with // === ADDED and // === UPDATED where applicable.
+import type {
+  GitHubDiscussionsResponse,
+} from "../types/githubDiscussions";
+
+// GitHub API service for fetching public organization metrics.
+// Discussions are fetched through a server-side proxy so no token is exposed client-side.
 
 export interface GitHubOrgStats {
   totalStars: number;
@@ -10,7 +11,7 @@ export interface GitHubOrgStats {
   totalRepositories: number;
   totalContributors: number;
   publicRepositories: number;
-  discussionsCount: number;
+  discussionsCount: number | null;
   lastUpdated: number;
 }
 
@@ -33,67 +34,22 @@ export interface GitHubOrganization {
   following: number;
 }
 
-export interface GitHubDiscussion {
-  id: string;
-  title: string;
-  body: string;
-  author: {
-    login: string;
-    avatar_url: string;
-    html_url: string;
-  };
-  category: {
-    name: string;
-    emoji: string;
-  };
-  created_at: string;
-  updated_at: string;
-  comments: number;
-  reactions: {
-    total_count: number;
-  };
-  html_url: string;
-  labels: Array<{
-    name: string;
-    color: string;
-  }>;
-}
-
 class GitHubService {
   private readonly ORG_NAME = "recodehive";
   private readonly CACHE_KEY = "github_org_stats";
   private readonly CACHE_DURATION = 30 * 60 * 1000; // 30 minutes in milliseconds
   private readonly BASE_URL = "https://api.github.com";
+  private readonly DISCUSSIONS_API_URL = "/api/github-discussions";
 
   // === ADDED: include anonymous contributors configurable (default false)
   private includeAnonymousContributors = false;
 
-  // === ADDED: stored token for authenticated API calls
-  private token: string = "";
-
-  // === ADDED: set the GitHub token (e.g. from Docusaurus customFields.gitToken)
-  setToken(token: string): void {
-    if (token && token.trim()) {
-      this.token = token.trim();
-    }
-  }
-
   // Get headers for GitHub API requests
   private getHeaders(): Record<string, string> {
-    const headers: Record<string, string> = {
+    return {
       Accept: "application/vnd.github.v3+json",
       "Content-Type": "application/json",
     };
-
-    // Use stored token first, then fall back to window.GITHUB_TOKEN
-    const token =
-      this.token ||
-      (typeof window !== "undefined" ? (window as any).GITHUB_TOKEN : "");
-    if (token) {
-      headers["Authorization"] = `token ${token}`;
-    }
-
-    return headers;
   }
 
   // === ADDED: setter to toggle anonymous contributors inclusion
@@ -287,54 +243,6 @@ class GitHubService {
     return totalContributors;
   }
 
-  // === UPDATED: Get discussions count for a specific repository (default: "Support")
-  // Reason: previous code used an org-wide issues search which returned issues, not discussions.
-  // This function uses GraphQL to read repository.discussions.totalCount (repo-specific).
-  // If you need org-wide discussions count, we should iterate all repos and sum totalCount (heavier).
-  private async getDiscussionsCount(
-    signal?: AbortSignal,
-    repoName: string = "Support",
-  ): Promise<number> {
-    try {
-      // GraphQL query to get discussions totalCount for a repository
-      const query = `
-        query ($owner: String!, $name: String!) {
-          repository(owner: $owner, name: $name) {
-            discussions { totalCount }
-          }
-        }
-      `;
-      const variables = { owner: this.ORG_NAME, name: repoName };
-
-      const resp = await fetch("https://api.github.com/graphql", {
-        method: "POST",
-        headers: {
-          ...this.getHeaders(),
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ query, variables }),
-        signal,
-      });
-
-      if (!resp.ok) {
-        console.warn(`GraphQL request for discussions failed: ${resp.status}`);
-        return 0;
-      }
-
-      const data = await resp.json();
-      if (data.errors) {
-        console.warn("GraphQL errors while fetching discussions:", data.errors);
-        return 0;
-      }
-
-      const count = data?.data?.repository?.discussions?.totalCount || 0;
-      return Number(count);
-    } catch (error) {
-      console.warn("Error fetching discussions count via GraphQL:", error);
-      return 0;
-    }
-  }
-
   // Main method to fetch all organization statistics
   async fetchOrganizationStats(signal?: AbortSignal): Promise<GitHubOrgStats> {
     // Try to get cached data first
@@ -344,11 +252,7 @@ class GitHubService {
     }
 
     try {
-      // Fetch organization info and repositories in parallel
-      const [orgInfo, repositories] = await Promise.all([
-        this.fetchOrganizationInfo(signal),
-        this.fetchAllRepositories(signal),
-      ]);
+      const repositories = await this.fetchAllRepositories(signal);
 
       // Filter out archived repositories for active stats
       const activeRepos = repositories.filter((repo) => !repo.archived);
@@ -363,12 +267,10 @@ class GitHubService {
         0,
       );
 
-      // Estimate contributors and get discussions count
-      // === UPDATED: getDiscussionsCount now uses GraphQL for a specific repo (default 'Support')
-      const [totalContributors, discussionsCount] = await Promise.all([
-        this.estimateContributors(activeRepos, signal),
-        this.getDiscussionsCount(signal), // default repoName: "Support" (change if you prefer another repo)
-      ]);
+      const totalContributors = await this.estimateContributors(
+        activeRepos,
+        signal,
+      );
 
       const stats: GitHubOrgStats = {
         totalStars,
@@ -376,7 +278,7 @@ class GitHubService {
         totalRepositories: repositories.length,
         publicRepositories: activeRepos.length,
         totalContributors,
-        discussionsCount,
+        discussionsCount: null,
         lastUpdated: Date.now(),
       };
 
@@ -394,7 +296,7 @@ class GitHubService {
         totalRepositories: 0,
         publicRepositories: 0,
         totalContributors: 0,
-        discussionsCount: 0,
+        discussionsCount: null,
         lastUpdated: Date.now(),
       };
 
@@ -422,194 +324,52 @@ class GitHubService {
     return { cached: true, age, expiresIn };
   }
 
-  // Fetch GitHub Discussions using GraphQL API (existing method kept intact)
   async fetchDiscussions(
     limit: number = 20,
     signal?: AbortSignal,
-  ): Promise<GitHubDiscussion[]> {
-    const query = `
-      query GetDiscussions($owner: String!, $name: String!, $first: Int!) {
-        repository(owner: $owner, name: $name) {
-          discussions(first: $first, orderBy: {field: UPDATED_AT, direction: DESC}) {
-            nodes {
-              id
-              title
-              body
-              createdAt
-              updatedAt
-              url
-              author {
-                login
-                avatarUrl
-                url
-              }
-              category {
-                name
-                emoji
-              }
-              comments {
-                totalCount
-              }
-              reactions {
-                totalCount
-              }
-              labels(first: 10) {
-                nodes {
-                  name
-                  color
-                }
-              }
-            }
-          }
-        }
-      }
-    `;
-
-    const variables = {
-      owner: this.ORG_NAME,
-      name: "recode-website", // Main repository for discussions (unchanged)
-      first: limit,
-    };
-
-    try {
-      const response = await fetch("https://api.github.com/graphql", {
-        method: "POST",
+  ): Promise<GitHubDiscussionsResponse> {
+    const response = await fetch(
+      `${this.DISCUSSIONS_API_URL}?limit=${encodeURIComponent(limit)}`,
+      {
         headers: {
-          ...this.getHeaders(),
-          "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        body: JSON.stringify({ query, variables }),
         signal,
-      });
+      },
+    );
 
-      if (!response.ok) {
-        throw new Error(`GraphQL request failed: ${response.status}`);
+    const contentType = response.headers.get("Content-Type") || "";
+    const isJsonResponse = contentType.includes("application/json");
+    const fallbackMessage = `Failed to fetch GitHub discussions: ${response.status} ${response.statusText}`;
+    let payload: GitHubDiscussionsResponse | null = null;
+
+    if (isJsonResponse) {
+      try {
+        payload = (await response.json()) as GitHubDiscussionsResponse;
+      } catch {
+        throw new Error(`${fallbackMessage} (invalid JSON response)`);
       }
-
-      const data = await response.json();
-
-      if (data.errors) {
-        console.error("GraphQL errors:", data.errors);
-        throw new Error("GraphQL query failed");
-      }
-
-      const discussions = data.data?.repository?.discussions?.nodes || [];
-
-      return discussions.map(
-        (discussion: any): GitHubDiscussion => ({
-          id: discussion.id,
-          title: discussion.title,
-          body: discussion.body || "",
-          author: {
-            login: discussion.author?.login || "Unknown",
-            avatar_url: discussion.author?.avatarUrl || "",
-            html_url: discussion.author?.url || "",
-          },
-          category: {
-            name: discussion.category?.name || "General",
-            emoji: discussion.category?.emoji || "💬",
-          },
-          created_at: discussion.createdAt,
-          updated_at: discussion.updatedAt,
-          comments: discussion.comments?.totalCount || 0,
-          reactions: {
-            total_count: discussion.reactions?.totalCount || 0,
-          },
-          html_url: discussion.url,
-          labels:
-            discussion.labels?.nodes?.map((label: any) => ({
-              name: label.name,
-              color: label.color,
-            })) || [],
-        }),
-      );
-    } catch (error) {
-      console.error("Error fetching discussions:", error);
-
-      // Return mock data for development/fallback
-      return this.getMockDiscussions();
     }
+
+    if (!response.ok) {
+      throw new Error(payload?.message || fallbackMessage);
+    }
+
+    if (!payload) {
+      throw new Error(`${fallbackMessage} (non-JSON response)`);
+    }
+
+    return payload;
   }
 
-  // Mock discussions for development/fallback (unchanged)
-  private getMockDiscussions(): GitHubDiscussion[] {
-    return [
-      {
-        id: "1",
-        title: "Welcome to recode hive Discussions!",
-        body: "This is where we discuss ideas, share knowledge, and help each other grow. Feel free to ask questions, share your projects, or just say hello!",
-        author: {
-          login: "recodehive",
-          avatar_url: "https://avatars.githubusercontent.com/u/your-org-id?v=4",
-          html_url: "https://github.com/recodehive",
-        },
-        category: {
-          name: "Announcements",
-          emoji: "📢",
-        },
-        created_at: new Date(Date.now() - 86400000).toISOString(),
-        updated_at: new Date(Date.now() - 3600000).toISOString(),
-        comments: 12,
-        reactions: {
-          total_count: 25,
-        },
-        html_url: "https://github.com/recodehive/recode-website/discussions",
-        labels: [
-          { name: "welcome", color: "0075ca" },
-          { name: "community", color: "7057ff" },
-        ],
-      },
-      {
-        id: "2",
-        title: "How to contribute to open source projects?",
-        body: "I'm new to open source and would love to learn how to make my first contribution. Any tips or resources would be greatly appreciated!",
-        author: {
-          login: "newcontributor",
-          avatar_url: "https://avatars.githubusercontent.com/u/example?v=4",
-          html_url: "https://github.com/newcontributor",
-        },
-        category: {
-          name: "Q&A",
-          emoji: "❓",
-        },
-        created_at: new Date(Date.now() - 172800000).toISOString(),
-        updated_at: new Date(Date.now() - 7200000).toISOString(),
-        comments: 8,
-        reactions: {
-          total_count: 15,
-        },
-        html_url: "https://github.com/recodehive/recode-website/discussions",
-        labels: [
-          { name: "question", color: "d876e3" },
-          { name: "beginner", color: "0e8a16" },
-        ],
-      },
-      {
-        id: "3",
-        title: "Feature Request: Dark Mode for Documentation",
-        body: "It would be great to have a dark mode option for the documentation pages. This would be easier on the eyes during late-night coding sessions.",
-        author: {
-          login: "darkmode-lover",
-          avatar_url: "https://avatars.githubusercontent.com/u/example2?v=4",
-          html_url: "https://github.com/darkmode-lover",
-        },
-        category: {
-          name: "Ideas",
-          emoji: "💡",
-        },
-        created_at: new Date(Date.now() - 259200000).toISOString(),
-        updated_at: new Date(Date.now() - 10800000).toISOString(),
-        comments: 5,
-        reactions: {
-          total_count: 22,
-        },
-        html_url: "https://github.com/recodehive/recode-website/discussions",
-        labels: [
-          { name: "enhancement", color: "a2eeef" },
-          { name: "ui/ux", color: "f9d0c4" },
-        ],
-      },
-    ];
+  async fetchDiscussionsCount(signal?: AbortSignal): Promise<number | null> {
+    try {
+      const payload = await this.fetchDiscussions(1, signal);
+      return payload.totalCount ?? null;
+    } catch (error) {
+      console.warn("Error fetching discussions count from proxy:", error);
+      return null;
+    }
   }
 }
 
