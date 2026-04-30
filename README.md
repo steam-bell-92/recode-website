@@ -20,7 +20,7 @@
 
 **Your all-in-one resource for learning Git, GitHub, Python through comprehensive tutorials and hands-on projects.**
 
-[Website](https://recodehive.com/) • [Documentation](https://recodehive.com/docs) • [Contributing](community/contributing-guidelines.md) • [Discord](https://discord.gg/Yxv9RA3r)
+[Website](https://recodehive.com/) • [Documentation](https://recodehive.com/docs) • [Contributing](community/contributing-guidelines.md) • [Discord](https://discord.gg/dh3TA8U55Q)
 
 </div>
 
@@ -216,7 +216,7 @@ For detailed guidelines, please refer to our [Contributing Guidelines](community
 
 Join our community and connect with fellow learners:
 
-[![Discord](https://img.shields.io/badge/Discord-5865F2.svg?style=for-the-badge&logo=Discord&logoColor=white)](https://discord.gg/Yxv9RA3r)
+[![Discord](https://img.shields.io/badge/Discord-5865F2.svg?style=for-the-badge&logo=Discord&logoColor=white)](https://discord.gg/dh3TA8U55Q)
 [![LinkedIn](https://img.shields.io/badge/Follow%20on-LinkedIn-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/sanjay-k-v/)
 
 ## 📊 Project Statistics
