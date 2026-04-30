@@ -147,14 +147,7 @@ a.menu__link.menu__link--active div span:first-child {
   font-weight: 600;
 }
 
-/* Next.js theme */
-.custom-sidebar-nextjs > .menu__list-item-collapsible > .menu__link {
-  background: linear-gradient(135deg, #000000, #333333);
-  color: white;
-  border-radius: 8px;
-  margin: 4px 0;
-  font-weight: 600;
-}
+
 
 
 /* Technical theme */

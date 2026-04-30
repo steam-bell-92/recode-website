@@ -194,16 +194,7 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
-    {
-      type: "category",
-      label: "⚡ Next.js",
-      className: "custom-sidebar-nextjs",
-      items: [
-        "Nextjs/intro-nextjs",
-        "Nextjs/setup-environment",
-        "Nextjs/project-structure",
-      ],
-    },
+
     {
       type: "category",
       label: "Docker",
