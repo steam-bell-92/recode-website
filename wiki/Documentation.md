@@ -595,7 +595,7 @@ Select scopes: public_repo, read:org, read:discussion
 Copy the token (you won't see it again!)
 
 #### Storing the Token:
-Do not store a GitHub token in `docusaurus.config.js` or any other client-bundled config. Keep it in server-side environment variables and call GitHub from a backend endpoint instead.
+Do not store a GitHub token in `docusaurus.config.ts/js` or any other client-bundled config. Keep it in server-side environment variables and call GitHub from a backend endpoint instead.
 #### Error Handling
 **Rate Limit Exceeded (403)**
 
