@@ -10,9 +10,9 @@ interface Blog {
 }
 
 const blogs: Blog[] = [
- 
+
   {
-    id: 2,
+    id: 1,
     title: "Land a Job in UI/UX Design",
     image: "/img/blogs/04-ux-job-design.png",
     description:
@@ -24,7 +24,7 @@ const blogs: Blog[] = [
   },
 
   {
-    id: 6,
+    id: 2,
     title: "What is GitHub Copilot",
     image: "/img/blogs/06-github-agent.png",
     description:
@@ -35,7 +35,7 @@ const blogs: Blog[] = [
     tags: ["GitHub", "AI", "Coding", "Tools"],
   },
   {
-    id: 7,
+    id: 3,
     title: "Apache Spark Architecture Explained",
     image: "img/blogs/07-spark-blog-banner.png",
     description:
@@ -46,7 +46,7 @@ const blogs: Blog[] = [
     tags: ["Apache Spark", "Big Data", "Data Engineering", "Architecture"],
   },
   {
-    id: 8,
+    id: 4,
     title: "N8N: The Future of Workflow Automation",
     image: "/img/blogs/n8n-logo.png",
     description:
@@ -57,7 +57,7 @@ const blogs: Blog[] = [
     tags: ["Automation", "Workflow", "N8N", "Tools"],
   },
   {
-    id: 9,
+    id: 5,
     title: "OpenAI AgentKit: Building AI Agents Without the Complexity",
     image: "/img/blogs/Agent_Builder.png",
     description:
@@ -66,6 +66,17 @@ const blogs: Blog[] = [
     authors: ["Aditya-Singh-Rathore"],
     category: "AI & Tech",
     tags: ["AI", "OpenAI", "Development", "Agents"],
+  },
+  {
+    id: 6,
+    title: "Delta Lake: An Introduction to Trustworthy Data Storage",
+    image: "/img/blogs/delta-lake-logo.png",
+    description:
+      "Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark and big data workloads.",
+    slug: "deltalake-data-storage",
+    authors: ["Aditya-Singh-Rathore"],
+    category: "data engineering",
+    tags: ["Delta Lake", "Big Data", "Data Engineering", "Storage"],
   },
 ];
 
