@@ -78,6 +78,17 @@ const blogs: Blog[] = [
     category: "data engineering",
     tags: ["Delta Lake", "Big Data", "Data Engineering", "Storage"],
   },
+  {
+    id: 7,
+    title: "How I Cleared the Azure Data Engineer Associate Certification",
+    image: "/img/blogs/microsoft-certified-associate-badge.png",
+    description:
+      "The Microsoft Certified: Azure Data Engineer Associate certification validates your skills in designing and implementing data solutions on the Azure platform.",
+    slug: "fabric-data-engineer",
+    authors: ["Aditya-Singh-Rathore"],
+    category: "data engineering",
+    tags: ["Microsoft", "Azure", "Data Engineering", "Certification"],
+  },
 ];
 
 export default blogs;
