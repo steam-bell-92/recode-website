@@ -1,54 +1,173 @@
 ---
 id: docs
-title: Welcome to the recode hive Tutorial
-sidebar_label: Welcome to recode hive #displays in sidebar
+title: Welcome to recode hive
+sidebar_label: Welcome to recode hive
 sidebar_position: 1
 ---
 
-# Welcome to recode hive Tutorial!
+# Welcome to recode hive
 
-Our mission is to provide accessible and comprehensive educational resources through open-source contributions while building an inclusive global community. Whether you're looking to kickstart your career in tech, master new programming languages, contribute to meaningful projects, or earn while learning, we've got you covered.
+**Collaboration 1st, code 2nd.**
 
-With a community of experienced contributors, maintainers, and industry professionals, we offer a diverse range of learning paths and real-world project opportunities tailored to meet your specific goals and interests. Join our community today and embark on your journey towards success in the open-source world and tech industry!
-
-## What is recode hive?
-
-recode hive is an innovative open-source learning platform that combines education with practical contribution opportunities. Our platform offers a wide range of tech tutorials, hands-on projects, and mentorship programs to help you learn new skills while contributing to meaningful open-source projects. We cover various topics including Python programming, SQL databases, GitHub workflows, API testing, web development, and more. Whether you're a beginner looking to make your first open-source contribution or an experienced developer looking to expand your skill set and give back to the community, we have something for everyone.
-
-## Why Choose recode hive?
-
-There are many compelling reasons to choose recode hive for your tech education and open-source journey. Here are just a few:
-
-- **Quality Content**: Our tutorials and projects are created by experienced contributors and industry professionals who are passionate about open-source development and helping others succeed. You can trust that you're getting the most up-to-date and relevant information when you engage with recode hive. Most importantly, our content is designed to be practical and applicable to real-world scenarios, so you'll gain valuable experience while learning.
-
-- **Earn While Learning**: Unlike traditional learning platforms, recode hive offers a unique GitHub sponsorship program where you can earn ₹100 to ₹500 per week based on your contributions. This creates a sustainable learning environment where your efforts are recognized and rewarded, making your educational journey financially beneficial.
-
-- **Flexibility**: We understand that everyone has different learning styles and schedules, which is why we offer various ways to contribute and learn. Whether you prefer to work on documentation, code tutorials, create educational content, or contribute to existing projects, we have opportunities that will work for you.
-
-- **Global Community**: When you join recode hive, you're not just accessing tutorials – you're joining a vibrant community of like-minded individuals from around the world who are passionate about tech, open-source, and continuous learning. Our community spans across different time zones and cultures, providing diverse perspectives and networking opportunities.
-
-- **Completely Free**: All the courses, tutorials, and mentorship opportunities on recode hive are completely free of cost. You can access them anytime, anywhere, without worrying about subscription fees or hidden costs. We believe that quality education and open-source contribution opportunities should be accessible to everyone, regardless of their financial situation.
-
-- **Beginner-Friendly**: Whether you're brand new to programming or have some experience under your belt, our learning paths are designed to be beginner-friendly and easy to follow. We break down complex concepts into simple, step-by-step tutorials with clear explanations, so you can learn at your own pace and build confidence from the ground up.
-
-- **Comprehensive Learning Paths**: Our curriculum covers a wide range of topics essential for modern software development, from Python programming and SQL databases to GitHub workflows and API testing. Whether you're interested in backend development, data analysis, web development, or DevOps, we have structured learning paths that will help you achieve your goals.
-
-- **Real-World Projects**: Learning by doing is one of the most effective ways to master new skills, which is why all our tutorials are connected to actual open-source projects that serve real purposes. By contributing to these projects, you'll gain practical experience, build a impressive portfolio, and create work that benefits the broader developer community.
-
-- **Career Advancement**: By learning and contributing through recode hive, you'll be better equipped to advance your career and pursue new opportunities in the tech industry. Your open-source contributions serve as a public portfolio demonstrating your skills to potential employers, making you stand out in the competitive job market.
-
-- **Continuous Learning Culture**: Technology evolves rapidly, and recode hive is committed to helping you stay current with the latest trends, tools, and best practices in the tech industry. Our community-driven approach ensures that content is regularly updated and new learning opportunities are continuously added.
-
-- **Mentorship and Support**: Our experienced community members and maintainers are here to help you every step of the way. Through our free 1:1 mentorship program, Discord community, and comprehensive documentation, you'll have multiple avenues for getting help, feedback, and guidance whenever you need it.
-
-- **Open Source Impact**: Every contribution you make through recode hive has a real impact. You're not just learning for the sake of learning – you're contributing to projects that are used by developers worldwide, building tools that solve real problems, and helping to advance the open-source ecosystem.
-
-## Get Started Today!
-
-Ready to begin your learning and contribution journey with recode hive? Start by exploring our learning paths, joining our Discord community, and making your first contribution to one of our beginner-friendly projects. Whether you're looking to learn new skills, build your portfolio, earn through contributions, or simply be part of an amazing global community, recode hive provides the perfect environment to achieve your goals.
-
-Don't just learn – contribute, grow, and earn while making a real impact in the open-source world. We can't wait to see what you'll accomplish with recode hive – welcome aboard!
+recode hive is an open-source educational platform built to help developers master essential technologies through interactive tutorials, practical guides, and community-driven learning. Whether you are a beginner taking your first steps in programming or an experienced developer sharpening your skills, recode hive provides the resources you need to grow.
 
 ---
 
-**recode hive** – _where learning meets contribution in the world of open-source development._
+## What is recode hive?
+
+recode hive is a community-first platform that focuses on:
+
+- **Data Science & Engineering** — tutorials, projects, and guides on Python, SQL, Pandas, and data pipelines.
+- **Open Source Contribution** — a welcoming space to make your first (or hundredth) pull request.
+- **GitHub & Developer Tools** — hands-on learning for Git, GitHub Actions, Copilot, and the GitHub ecosystem.
+- **Career Growth** — blog posts, podcasts, and resources tailored to help developers and data professionals grow their careers.
+
+The platform is built with [Docusaurus 3](https://docusaurus.io/), written in TypeScript, and styled with Tailwind CSS. Every piece of content — docs, blogs, community pages — is open-source and open to contributions.
+
+---
+
+## Explore the Repositories
+
+The recode hive GitHub organization ([github.com/recodehive](https://github.com/recodehive)) hosts several repositories:
+
+| Repository | Description |
+|---|---|
+| [recode-website](https://github.com/recodehive/recode-website) | The main website — docs, blogs, and community pages |
+| [machine-learning-repos](https://github.com/recodehive/machine-learning-repos) | Curated ML frameworks, libraries, and resources (400+ stars) |
+| [Stackoverflow-Analysis](https://github.com/recodehive/Stackoverflow-Analysis) | 3-year developer survey analysis and salary prediction (242 stars) |
+| [awesome-github-profiles](https://github.com/recodehive/awesome-github-profiles) | Inspiring GitHub profile READMEs from around the world (139 stars) |
+| [Opensource-practice](https://github.com/recodehive/Opensource-practice) | Beginner-friendly practice repo with 1,000+ contributors (103 stars) |
+| [Scrape-ML](https://github.com/recodehive/Scrape-ML) | Python scripts to scrape and process data for ML projects (108 stars) |
+
+---
+
+## Join the Community
+
+recode hive has 600+ GitHub followers and contributors from all over the world. Here is how to become part of it:
+
+1. **Join the GitHub Organization** — raise an issue using the [Invite Link](https://github.com/Recode-Hive/Support/issues/new?assignees=&labels=invite+me+to+the+community&projects=&template=invitation.yml&title=Please+invite+me+to+the+Recode-Hive+GitHub+Community+Organization) and you'll receive an email invitation.
+2. **Join Discord** — chat with members, ask questions, and find help in real time at [discord.gg/dh3TA8U55Q](https://discord.gg/dh3TA8U55Q).
+3. **Practice open source** — make your first PR in the [Opensource-practice](https://github.com/recodehive/Opensource-practice) repository.
+4. **Subscribe to the newsletter** — get career insights delivered to your inbox at [recodehive.substack.com](https://recodehive.substack.com/).
+
+---
+
+## Set Up the Repository Locally
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v18 or later
+- [Git](https://git-scm.com/)
+- [Docker](https://docs.docker.com/engine/install/) *(optional — for containerized development)*
+
+### 1. Fork and Clone
+
+Go to [github.com/recodehive/recode-website](https://github.com/recodehive/recode-website), click **Fork**, then clone your fork:
+
+```bash
+git clone https://github.com/your-username/recode-website.git
+cd recode-website
+```
+
+Add the upstream remote so you can stay in sync with the main repo:
+
+```bash
+git remote add upstream https://github.com/recodehive/recode-website.git
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the Development Server
+
+```bash
+npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser. The site hot-reloads automatically as you edit files.
+
+### 4. Using Docker (Alternative)
+
+```bash
+# Build the image (first time only)
+docker build -t recodehive-app .
+
+# Run the container
+docker run -p 3000:3000 recodehive-app
+```
+
+Or with hot-reload using Docker Compose:
+
+```bash
+docker-compose up
+```
+
+---
+
+## Contribution Workflow
+
+1. **Keep your fork up to date** before starting any work:
+
+   ```bash
+   git checkout main
+   git fetch upstream
+   git merge upstream/main
+   ```
+
+2. **Create a new branch** for your contribution:
+
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+3. **Make your changes** and preview them at `localhost:3000`.
+
+4. **Commit your changes:**
+
+   ```bash
+   git add .
+   git commit -m "Add: brief description of your changes"
+   ```
+
+5. **Push to your fork:**
+
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+6. **Open a Pull Request** — go to your fork on GitHub and click **Compare & pull request**. Set the base repository to `recodehive/recode-website` and the base branch to `main`.
+
+For full details, read the [Contributing Guidelines](https://github.com/recodehive/recode-website/blob/main/community/contributing-guidelines.md).
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Docusaurus 3 (React + TypeScript) |
+| Language | TypeScript (Node.js ≥ 18) |
+| Styling | Tailwind CSS 4 |
+| UI Components | Radix UI, Framer Motion |
+| Linting | ESLint, Prettier |
+
+---
+
+## Stay Connected
+
+| Platform | Link |
+|---|---|
+| Website | [recodehive.com](https://recodehive.com/) |
+| YouTube | [@RecodeHive](https://www.youtube.com/@RecodeHive) |
+| LinkedIn | [Sanjay K V](https://www.linkedin.com/in/sanjay-k-v/) |
+| Twitter / X | [@sanjay_kv_](https://x.com/sanjay_kv_) |
+| Instagram | [@nomad_brains](https://www.instagram.com/nomad_brains/) |
+| Newsletter | [recodehive.substack.com](https://recodehive.substack.com/) |
+| Discord | [discord.gg/Yxv9RA3r](https://discord.gg/Yxv9RA3r) |
+
+---
+
+Happy open-source contributions — here's to your career success! 🎉

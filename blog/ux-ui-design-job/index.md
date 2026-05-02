@@ -37,7 +37,7 @@ canonical_url:
  <!-- truncate -->
 ### 🔍 Research the Industry and Find Your Niche
 
-UI/UX design is one of the most exciting and innovative fields in the tech industry. It is a rapidly growing field with plenty of opportunities for those who are willing to learn and work hard. In this blog post, I’ll be giving you 10 steps for anyone looking to land a job in UI/UX design as a newbie. These steps will help you on a path to land a job in UI/UX design, as well as give you an insight into the industry and what it takes to be a successful designer.
+UI/UX design is one of the most exciting and innovative fields in the tech industry. It is a rapidly growing field with plenty of opportunities for those who are willing to learn and work hard. In this blog post,We'll discuss 10 steps for anyone looking to land a job in UI/UX design as a newbie. These steps will help you on a path to land a job in UI/UX design, as well as give you an insight into the industry and what it takes to be a successful designer.
 
 Start by exploring the UI/UX industry. Learn the different areas like:
 
@@ -55,9 +55,10 @@ First and foremost, you need to get educated. There are a ton of resources out t
 
 - ✅[Coursera](https://coursera.org)  
 - ✅[Udacity](https://udacity.com)  
-- ✅[Skillshare](https://skillshare.com)  
+- ✅[Skillshare](https://skillshare.com)
+- ✅[Youtube](https://youtu.be/MBblN98-5lg?si=DWopPB8Hd3QNL7WR) 
 
-One great way to get started is by checking out some of the free online courses that are available. Coursera, Udacity, and Skillshare all offer excellent options that will teach you the basics of UI/UX design. Once you have a solid foundation, you can begin to look for paid courses that will help you take your skills to the next level.
+One great way to get started is by checking out some of the free online courses that are available. Coursera, Udacity,Youtube and Skillshare all offer excellent options that will teach you the basics of UI/UX design. Once you have a solid foundation, you can begin to look for paid courses that will help you take your skills to the next level.
 
 
 ![Infographic showing career growth and opportunities in UI/UX design](/img/blogs/04-ux-job-design.png)
@@ -182,9 +183,6 @@ If you’re interested in a career in UI/UX design, be patient and keep learning
 ### 🏁 Final Verdict
 
 If you’ve read this far, **thank you so much** 🙏  
-I hope you enjoyed this article on:
-
-> “**Will Technology Replace UX Designers in the Near Future?**”
 
 UX designers must be able to keep up with the rapid pace of technology and stay up-to-date with the latest trends and tools. But there are still plenty of exciting opportunities for UX designers, and UX design will remain relevant.
 
