@@ -21,7 +21,7 @@ const hasPartialAlgoliaDocSearchConfig = Boolean(
 
 if (hasPartialAlgoliaDocSearchConfig && !hasAlgoliaDocSearch) {
   console.warn(
-    "Algolia DocSearch is partially configured. Set ALGOLIA_APP_ID, ALGOLIA_SEARCH_API_KEY, and ALGOLIA_INDEX_NAME to enable navbar search.",
+    "Algolia DocSearch is partially configured. Set ALGOLIA_APP_ID, ALGOLIA_SEARCH_API_KEY, and the actual Algolia index name in ALGOLIA_INDEX_NAME to enable navbar search.",
   );
 }
 
@@ -296,7 +296,7 @@ const config: Config = {
         max: 1030,
         min: 640,
         steps: 2,
-        disableInDev: true,
+        disableInDev: false,
       },
     ],
   ],
