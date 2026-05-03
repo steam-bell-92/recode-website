@@ -14,8 +14,8 @@
 
 .product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15);
-  border-color: rgba(102, 126, 234, 0.3);
+  box-shadow: 0 12px 24px rgba(46, 133, 85, 0.15);
+  border-color: rgba(46, 133, 85, 0.3);
 }
 
 /* Image Section */
@@ -70,13 +70,13 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: #667eea;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: var(--ifm-color-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .overlay-button:hover {
   transform: scale(1.1);
-  background: linear-gradient(135deg, #667eea 0%, #06b6d4 100%);
+  background: var(--ifm-color-primary);
   color: white;
 }
 
@@ -114,7 +114,7 @@
   position: absolute;
   top: 12px;
   left: 12px;
-  background: linear-gradient(135deg, #667eea 0%, #5b47d6 100%);
+  background: var(--ifm-color-primary);
   color: white;
   padding: 4px 10px;
   border-radius: 6px;
@@ -123,7 +123,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   z-index: 3;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Content Section */
@@ -206,7 +206,7 @@
   display: flex;
   align-items: baseline;
   font-weight: 700;
-  color: #5b47d6;
+  color: var(--ifm-font-color-base);
 }
 
 .price-currency {
@@ -223,7 +223,7 @@
   justify-content: center;
   gap: 0.5rem;
   padding: 0.625rem 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #5b47d6 100%);
+  background: var(--ifm-color-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -232,13 +232,13 @@
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .product-card-button:hover {
-  background: linear-gradient(135deg, #818cf8 0%, #06b6d4 100%);
+  background: var(--ifm-color-primary-dark);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .product-card-button:active {

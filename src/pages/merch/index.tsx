@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import ProductGrid from "../../components/merch/ProductGrid";
 import FilterBar from "../../components/merch/FilterBar";
 import ShoppingCart from "../../components/merch/ShoppingCart";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, Truck, RefreshCw, Leaf, ShieldCheck, Globe, Medal } from "lucide-react";
 import { getProducts, isShopifyConfigured } from "../../lib/shopify";
 import "./merch.css";
 
@@ -82,6 +82,19 @@ const sampleProducts: Product[] = [
     category: "accessories",
   },
 ];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+};
 
 export default function MerchPage(): ReactNode {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -225,11 +238,11 @@ export default function MerchPage(): ReactNode {
         <section className="merch-hero">
           <motion.div
             className="merch-hero-content"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
           >
-            <div className="hero-left">
+            <motion.div className="hero-left" variants={itemVariants}>
               <h1 className="merch-hero-title">
                 Official Recode Merch
               </h1>
@@ -237,23 +250,40 @@ export default function MerchPage(): ReactNode {
                 Wear your code pride! Premium quality apparel and accessories for
                 developers who love open source.
               </p>
-            </div>
-            <div className="hero-right">
-              <div className="merch-hero-stats">
-                <div className="stat-item stat-item-highlighted">
-                  <span className="stat-number">100%</span>
-                  <span className="stat-label">Quality</span>
-                </div>
-                <div className="stat-item stat-item-highlighted">
-                  <span className="stat-number">🌍</span>
-                  <span className="stat-label">Worldwide Shipping</span>
-                </div>
-                <div className="stat-item stat-item-highlighted">
-                  <span className="stat-number">🌱</span>
-                  <span className="stat-label">Eco-Friendly</span>
-                </div>
+              <div className="hero-buttons">
+                <button
+                  className="hero-button hero-button-primary"
+                  onClick={() => {
+                    const section = document.querySelector(".merch-products-section");
+                    if (section) section.scrollIntoView({ behavior: "smooth" });
+                  }}
+                >
+                  Shop Collection
+                </button>
+                <button
+                  className="hero-button hero-button-secondary"
+                  onClick={() => setSelectedCategory("accessories")}
+                >
+                  View Accessories
+                </button>
               </div>
-            </div>
+            </motion.div>
+            <motion.div className="hero-right" variants={itemVariants}>
+              <div className="merch-hero-stats">
+                <motion.div className="stat-item stat-item-highlighted" whileHover={{ scale: 1.05 }} variants={itemVariants}>
+                  <Medal className="stat-icon" size={28} color="var(--ifm-color-primary)" />
+                  <span className="stat-label">Quality</span>
+                </motion.div>
+                <motion.div className="stat-item stat-item-highlighted" whileHover={{ scale: 1.05 }} variants={itemVariants}>
+                  <Globe className="stat-icon" size={28} color="var(--ifm-color-primary)" />
+                  <span className="stat-label">Worldwide Shipping</span>
+                </motion.div>
+                <motion.div className="stat-item stat-item-highlighted" whileHover={{ scale: 1.05 }} variants={itemVariants}>
+                  <Leaf className="stat-icon" size={28} color="var(--ifm-color-primary)" />
+                  <span className="stat-label">Eco-Friendly</span>
+                </motion.div>
+              </div>
+            </motion.div>
           </motion.div>
         </section>
 
@@ -311,48 +341,34 @@ export default function MerchPage(): ReactNode {
 
         {/* Info Section */}
         <section className="merch-info-section">
-          <div className="info-grid">
-            <motion.div
-              className="info-card info-card-highlighted"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-            >
-              <h3>🚚 Free Shipping</h3>
+          <motion.div
+            className="info-grid"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-50px" }}
+          >
+            <motion.div className="info-card info-card-highlighted" variants={itemVariants}>
+              <div className="info-card-icon"><Truck size={32} color="var(--ifm-color-primary)" /></div>
+              <h3>Free Shipping</h3>
               <p>Free shipping on orders over $50</p>
             </motion.div>
-            <motion.div
-              className="info-card info-card-highlighted"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <h3>🔄 Easy Returns</h3>
+            <motion.div className="info-card info-card-highlighted" variants={itemVariants}>
+              <div className="info-card-icon"><RefreshCw size={32} color="var(--ifm-color-primary)" /></div>
+              <h3>Easy Returns</h3>
               <p>30-day return policy, no questions asked</p>
             </motion.div>
-            <motion.div
-              className="info-card info-card-highlighted"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-            >
-              <h3>🌱 Sustainable</h3>
+            <motion.div className="info-card info-card-highlighted" variants={itemVariants}>
+              <div className="info-card-icon"><Leaf size={32} color="var(--ifm-color-primary)" /></div>
+              <h3>Sustainable</h3>
               <p>Eco-friendly materials and ethical production</p>
             </motion.div>
-            <motion.div
-              className="info-card info-card-highlighted"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-            >
-              <h3>💯 Quality Guarantee</h3>
+            <motion.div className="info-card info-card-highlighted" variants={itemVariants}>
+              <div className="info-card-icon"><ShieldCheck size={32} color="var(--ifm-color-primary)" /></div>
+              <h3>Quality Guarantee</h3>
               <p>Premium materials, built to last</p>
             </motion.div>
-          </div>
+          </motion.div>
         </section>
       </div>
     </Layout>
