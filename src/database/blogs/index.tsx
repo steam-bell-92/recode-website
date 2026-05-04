@@ -99,7 +99,17 @@ const blogs: Blog[] = [
     authors: ["Aditya-Singh-Rathore"],
     category: "data engineering",
     tags: ["Microsoft", "Azure", "Data Engineering", "Certification", "Fabric", "OneLake", "Data Workloads", "Unified Analytics"],
-
+  },
+  {
+    id:10,
+    title: "Lakehouse vs Data Warehouse: A Comprehensive Comparison",
+    image: "/img/blogs/datalake_vs_warehouse.png",
+    description:
+      "Lakehouse and Data Warehouse are two different data storage architectures. A Data Warehouse is a centralized repository for structured data, optimized for reporting and analysis. A Lakehouse combines the best of both worlds, allowing for the storage of both structured and unstructured data, providing flexibility and scalability.",
+    slug: "lakehouse-vs-warehouse",
+    authors: ["Aditya-Singh-Rathore"],
+    category: "data engineering",
+    tags: ["Lakehouse", "Data Warehouse", "Data Storage", "Big Data", "Architecture", "Comparison"],
   },
 ];
 
