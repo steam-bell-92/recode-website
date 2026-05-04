@@ -1085,6 +1085,7 @@ const GithubBadgesContent = (): React.ReactElement => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            gap: "24px",
             borderRadius: "24px",
             padding: "32px",
             width: "100%",
@@ -1092,7 +1093,7 @@ const GithubBadgesContent = (): React.ReactElement => {
             margin: "0 auto",
           }}
         >
-          <div style={{ textAlign: "center", marginBottom: "24px", width: "100%" }}>
+          <div style={{ textAlign: "center", width: "100%" }}>
             <h2 className={styles.subheading}>🛈 More Information 🛈</h2>
             <p className={styles.paragraph}>
               You can find more information about GitHub Badges under this{" "}
@@ -1121,7 +1122,6 @@ const GithubBadgesContent = (): React.ReactElement => {
                 style={{
                   fontSize: "1.2rem",
                   margin: "16px 0",
-                  textAlign: "center",
                 }}
               >
                 Getting GitHub certified is a strong endorsement of your skills
