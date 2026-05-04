@@ -72,7 +72,7 @@ jobs:
             const query = `
               query($owner: String!) {
                 organization(login: $owner) {
-                  projectsV2(first: 20) {
+                  projectsV2(first: 100) {
                     nodes {
                       id
                       title
