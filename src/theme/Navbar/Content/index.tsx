@@ -8,6 +8,7 @@ import { useThemeConfig, ErrorCauseBoundary } from "@docusaurus/theme-common";
 import { splitNavbarItems } from "@docusaurus/theme-common/internal";
 import NavbarItem, { type Props as NavbarItemConfig } from "@theme/NavbarItem";
 import NavbarColorModeToggle from "@theme/Navbar/ColorModeToggle";
+import AlgoliaSiteSearch from "@site/src/components/AlgoliaSiteSearch";
 // import SearchBar from '@theme/SearchBar';
 import NavbarMobileSidebarToggle from "@theme/Navbar/MobileSidebar/Toggle";
 import NavbarLogo from "@theme/Navbar/Logo";
@@ -80,10 +81,6 @@ export default function NavbarContent(): ReactNode {
     () => splitNavbarItems(items),
     [items],
   );
-  const searchBarItem = useMemo(
-    () => items.find((item) => item.type === "search"),
-    [items],
-  );
 
   return (
     <NavbarContentLayout
@@ -101,6 +98,7 @@ export default function NavbarContent(): ReactNode {
         // Ask the user to add the respective navbar items => more flexible
         <>
           <NavbarItems items={rightItems} />
+          <AlgoliaSiteSearch />
           <NavbarColorModeToggle />
           {/* Search component disabled */}
           {/* {!searchBarItem && (

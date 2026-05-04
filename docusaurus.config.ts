@@ -11,17 +11,17 @@ const algoliaAppId = process.env.ALGOLIA_APP_ID?.trim();
 const algoliaSearchApiKey = process.env.ALGOLIA_SEARCH_API_KEY?.trim();
 const algoliaIndexName = process.env.ALGOLIA_INDEX_NAME?.trim();
 
-const hasAlgoliaDocSearch = Boolean(
+const hasAlgoliaSiteSearch = Boolean(
   algoliaAppId && algoliaSearchApiKey && algoliaIndexName,
 );
 
-const hasPartialAlgoliaDocSearchConfig = Boolean(
+const hasPartialAlgoliaSiteSearchConfig = Boolean(
   algoliaAppId || algoliaSearchApiKey || algoliaIndexName,
 );
 
-if (hasPartialAlgoliaDocSearchConfig && !hasAlgoliaDocSearch) {
+if (hasPartialAlgoliaSiteSearchConfig && !hasAlgoliaSiteSearch) {
   console.warn(
-    "Algolia DocSearch is partially configured. Set ALGOLIA_APP_ID, ALGOLIA_SEARCH_API_KEY, and the actual Algolia index name in ALGOLIA_INDEX_NAME to enable navbar search.",
+    "Algolia SiteSearch is partially configured. Set ALGOLIA_APP_ID, ALGOLIA_SEARCH_API_KEY, and the actual Algolia index name in ALGOLIA_INDEX_NAME to enable navbar search.",
   );
 }
 
@@ -224,14 +224,6 @@ const config: Config = {
             },
           ],
         },
-        ...(hasAlgoliaDocSearch
-          ? [
-              {
-                type: "search" as const,
-                position: "right" as const,
-              },
-            ]
-          : []),
         {
           type: "html",
           position: "right",
@@ -266,16 +258,6 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
-    ...(hasAlgoliaDocSearch
-      ? {
-          algolia: {
-            appId: algoliaAppId!,
-            apiKey: algoliaSearchApiKey!,
-            indexName: algoliaIndexName!,
-            contextualSearch: true,
-          },
-        }
-      : {}),
   } satisfies Preset.ThemeConfig,
 
   markdown: {
@@ -312,6 +294,13 @@ const config: Config = {
     EMAILJS_PUBLIC_KEY: process.env.EMAILJS_PUBLIC_KEY || "",
     EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID || "",
     EMAILJS_TEMPLATE_ID: process.env.EMAILJS_TEMPLATE_ID || "",
+    algoliaSiteSearch: hasAlgoliaSiteSearch
+      ? {
+          applicationId: algoliaAppId,
+          apiKey: algoliaSearchApiKey,
+          indexName: algoliaIndexName,
+        }
+      : null,
     hooks: {
       onBrokenMarkdownLinks: "warn",
     },
