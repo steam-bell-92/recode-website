@@ -91,6 +91,17 @@ const blogs: Blog[] = [
   },
   {
     id: 8,
+    title: "Microsoft Fabric: One Platform, One Lake, Every Data Workload",
+    image: "/img/blogs/microsoft-farbic-blog-image.png",
+    description:
+      "Microsoft Fabric is a unified analytics platform that integrates various data services and tools to provide a seamless experience for data professionals, enabling them to manage and analyze data across the entire data lifecycle.",
+    slug: "microsoft-fabric-explained",
+    authors: ["Aditya-Singh-Rathore"],
+    category: "data engineering",
+    tags: ["Microsoft", "Azure", "Data Engineering", "Certification", "Fabric", "OneLake", "Data Workloads", "Unified Analytics"],
+  },
+  {
+    id:10,
     title: "Lakehouse vs Data Warehouse: A Comprehensive Comparison",
     image: "/img/blogs/datalake_vs_warehouse.png",
     description:
