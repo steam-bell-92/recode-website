@@ -176,6 +176,8 @@ For teams that have spent years managing the operational overhead of a fragmente
 
 - **Microsoft Fabric Free Trial** → [app.fabric.microsoft.com](https://app.fabric.microsoft.com/)
 - **Full Documentation** → [learn.microsoft.com/fabric](https://learn.microsoft.com/fabric)
+- **Onelake Documentation** → [What is OneLake?](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview)
+- **Apache Spark** → [Apache Spark in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-engineering/spark-overview)
 
 ---
 
