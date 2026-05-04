@@ -37,6 +37,9 @@ export default function DiscussionCard({
   discussion,
   index,
 }: DiscussionCardProps): JSX.Element {
+  const handleCardClick = () => {
+    window.open(discussion.html_url, "_blank", "noopener,noreferrer");
+  };
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
@@ -65,6 +68,13 @@ export default function DiscussionCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ boxShadow: "0 4px 20px rgba(0,0,0,0.08)" }}
+      onClick={handleCardClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) =>
+        (e.key === "Enter" || e.key === " ") && handleCardClick()
+      }
+      aria-label={`Open discussion: ${discussion.title}`}
     >
       <div className="discussion-card-header">
         <div className="discussion-category-badge">
@@ -83,6 +93,7 @@ export default function DiscussionCard({
             href={discussion.html_url}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
           >
             {discussion.title}
           </a>
