@@ -1079,75 +1079,79 @@ const GithubBadgesContent = (): React.ReactElement => {
           </table>
         </div>{" "}
         <hr className={styles.hr} />
-        <div style={{ textAlign: "center" }}>
-          <h2 className={styles.subheading}>🛈 More Information 🛈</h2>
-          <p className={styles.paragraph}>
-            You can find more information about GitHub Badges under this{" "}
-            <a
-              href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              link
-            </a>
-          </p>
-        </div>
         <div
           className={styles.certificationHero}
           style={{
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            gap: "100px",
-            flexWrap: "wrap",
             borderRadius: "24px",
             padding: "32px",
             width: "100%",
-            maxWidth: "100vw",
+            maxWidth: "900px",
             margin: "0 auto",
           }}
         >
-          <div style={{ flex: 1, minWidth: 260 }}>
-            <h1 style={{ margin: 0 }}>Showcase your expertise with GitHub</h1>
-            {/* <p style={{ fontSize: "1.2rem", margin: "16px 0", color: "#000" }}>s
-          Getting GitHub certified is a strong endorsement of your skills and knowledge of the technologies and developer tools used by millions of developers worldwide.
-            </p> */}
+          <div style={{ textAlign: "center", marginBottom: "24px", width: "100%" }}>
+            <h2 className={styles.subheading}>🛈 More Information 🛈</h2>
+            <p className={styles.paragraph}>
+              You can find more information about GitHub Badges under this{" "}
+              <a
+                href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                link
+              </a>
+            </p>
           </div>
           <div
             style={{
-              flex: 1,
               display: "flex",
-              justifyContent: "flex-end",
-              minWidth: 220,
-              borderRadius: "20px",
+              alignItems: "center",
+              gap: "40px",
+              flexWrap: "wrap",
+              width: "100%",
+              justifyContent: "center",
             }}
           >
-            <img
-              src="https://images.ctfassets.net/wfutmusr1t3h/6eWM76bx8skN2B4Jpvkcil/3ccdafea4229f02802abbd9fc6634a3b/Certifiedtocat_full__2_.svg?w=1280&q=75"
-              alt="GitHub Certification"
+            <div style={{ flex: 1, minWidth: 260, textAlign: "center" }}>
+              <h1 style={{ margin: 0 }}>Showcase your expertise with GitHub</h1>
+              <p
+                style={{
+                  fontSize: "1.2rem",
+                  margin: "16px 0",
+                  textAlign: "center",
+                }}
+              >
+                Getting GitHub certified is a strong endorsement of your skills
+                and knowledge of the technologies and developer tools used by
+                millions of developers worldwide.
+              </p>
+            </div>
+            <div
               style={{
-                maxHeight: "320px",
-                width: "auto",
+                flex: 1,
+                display: "flex",
+                justifyContent: "center",
+                minWidth: 220,
                 borderRadius: "20px",
-                maxWidth: "100%",
-                objectFit: "contain",
-                background: "#f6f8fa",
-                padding: "8px",
-              }}
-            />
-          </div>
-          <div>
-            <p
-              style={{
-                fontSize: "1.2rem",
-                margin: "16px 0",
-                color: "#000",
-                textAlign: "left",
               }}
             >
-              Getting GitHub certified is a strong endorsement of your skills
-              and knowledge of the technologies and developer tools used by
-              millions of developers worldwide.
-            </p>
+              <img
+                src="https://images.ctfassets.net/wfutmusr1t3h/6eWM76bx8skN2B4Jpvkcil/3ccdafea4229f02802abbd9fc6634a3b/Certifiedtocat_full__2_.svg?w=1280&q=75"
+                alt="GitHub Certification"
+                style={{
+                  maxHeight: "320px",
+                  width: "auto",
+                  borderRadius: "20px",
+                  maxWidth: "100%",
+                  objectFit: "contain",
+                  background: "#f6f8fa",
+                  padding: "8px",
+                }}
+              />
+            </div>
           </div>
         </div>
         <div className={styles.certificationCards}>
