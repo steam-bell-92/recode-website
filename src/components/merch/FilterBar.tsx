@@ -1,5 +1,5 @@
 import React from "react";
-import { Filter, SlidersHorizontal } from "lucide-react";
+import { Filter, SlidersHorizontal, ShoppingBag, Shirt, Component, Backpack } from "lucide-react";
 import "./FilterBar.css";
 
 interface FilterBarProps {
@@ -10,10 +10,10 @@ interface FilterBarProps {
 }
 
 const categories = [
-  { id: "all", label: "All Products", icon: "🛍️" },
-  { id: "t-shirts", label: "T-Shirts", icon: "👕" },
-  { id: "hoodies", label: "Hoodies", icon: "🧥" },
-  { id: "accessories", label: "Accessories", icon: "🎒" },
+  { id: "all", label: "All Products", icon: <ShoppingBag size={18} /> },
+  { id: "t-shirts", label: "T-Shirts", icon: <Shirt size={18} /> },
+  { id: "hoodies", label: "Hoodies", icon: <Component size={18} /> },
+  { id: "accessories", label: "Accessories", icon: <Backpack size={18} /> },
 ];
 
 const sortOptions = [

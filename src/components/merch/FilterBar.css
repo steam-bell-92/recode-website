@@ -71,18 +71,18 @@
 }
 
 .category-button.active {
-  background: linear-gradient(135deg, #667eea 0%, #5b47d6 100%);
-  border-color: #667eea;
+  background: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
   color: #ffffff !important;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .category-button.active:hover {
-  background: linear-gradient(135deg, #818cf8 0%, #06b6d4 100%);
-  border-color: #818cf8;
+  background: var(--ifm-color-primary-dark);
+  border-color: var(--ifm-color-primary-dark);
   transform: translateX(4px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .category-icon {
@@ -124,9 +124,9 @@
 
 .sort-select:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: var(--ifm-color-primary);
   background-color: #ffffff;
-  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15), 0 2px 8px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 0 0 4px rgba(46, 133, 85, 0.15), 0 2px 8px rgba(46, 133, 85, 0.2);
 }
 
 /* Responsive Design */

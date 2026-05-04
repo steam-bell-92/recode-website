@@ -11,12 +11,8 @@
 .merch-hero {
   padding: 5rem 2rem 4rem;
   text-align: center;
-  background: linear-gradient(
-    135deg,
-    #667eea 0%,
-    #764ba2 50%,
-    #5b47d6 100%
-  );
+  background: var(--ifm-background-color);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
   margin-bottom: 0;
   position: relative;
   overflow: hidden;
@@ -46,12 +42,12 @@
 .merch-hero-content {
   position: relative;
   z-index: 1;
-  max-width: 1400px;
+  max-width: 1100px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 6rem;
 }
 
 .hero-left {
@@ -65,24 +61,64 @@
 
 .merch-hero .merch-hero-content .merch-hero-title {
   font-size: 3rem;
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 1rem;
   line-height: 1.2;
-  color: #ffffff !important;
+  color: var(--ifm-font-color-base) !important;
   text-shadow: none !important;
   background: none !important;
-  -webkit-text-fill-color: #ffffff !important;
+  -webkit-text-fill-color: var(--ifm-font-color-base) !important;
   letter-spacing: -0.02em;
   text-align: left;
 }
 
 .merch-hero-description {
   font-size: 1.125rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 0;
+  color: var(--ifm-font-color-secondary);
+  margin-bottom: 2rem;
   font-weight: 400;
   line-height: 1.6;
   text-align: left;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.hero-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.hero-button-primary {
+  background: var(--ifm-color-primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hero-button-primary:hover {
+  background: var(--ifm-color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.hero-button-secondary {
+  background: transparent;
+  color: var(--ifm-color-primary);
+  border: 2px solid var(--ifm-color-primary);
+}
+
+.hero-button-secondary:hover {
+  background: rgba(var(--ifm-color-primary-rgb), 0.1);
+  transform: translateY(-2px);
 }
 
 .merch-hero-stats {
@@ -99,36 +135,37 @@
 }
 
 .stat-item-highlighted {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--ifm-color-emphasis-100);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--ifm-color-emphasis-200);
   border-radius: 12px;
   padding: 1.25rem 1.75rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: default;
 }
 
 .stat-item-highlighted:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  background: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-primary);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
 }
 
 .merch-hero .merch-hero-stats .stat-item .stat-number {
   font-size: 1.75rem;
-  font-weight: 600;
-  color: #ffffff !important;
+  font-weight: 700;
+  color: var(--ifm-font-color-base) !important;
   text-shadow: none !important;
   background: none !important;
-  -webkit-text-fill-color: #ffffff !important;
+  -webkit-text-fill-color: var(--ifm-color-primary) !important;
 }
 
 .stat-label {
   font-size: 0.875rem;
-  color: #ffffff !important;
+  color: var(--ifm-font-color-secondary) !important;
   font-weight: 600;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  text-shadow: none;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -173,39 +210,47 @@
 .info-card {
   padding: 2rem;
   background: var(--ifm-card-background-color);
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
 }
 
+.info-card-icon {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
 .info-card-highlighted {
-  background: var(--ifm-card-background-color);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(var(--ifm-color-primary), 0.1);
   cursor: default;
 }
 
 .info-card-highlighted:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.12);
-  border-color: rgba(102, 126, 234, 0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--ifm-color-primary-light);
 }
 
 .info-card-highlighted h3 {
   transition: color 0.2s ease;
-  color: #1f2937;
+  color: var(--ifm-color-primary-dark);
 }
 
 .info-card-highlighted:hover h3 {
-  color: #667eea;
+  color: var(--ifm-color-primary);
 }
 
 .info-card h3 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  color: #5b47d6;
+  color: var(--ifm-color-primary-dark);
 }
 
 .info-card p {
@@ -219,25 +264,25 @@
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #5b47d6 100%);
+  background: var(--ifm-color-primary);
   color: white;
   border: none;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .floating-cart-button:hover {
-  transform: scale(1.1);
-  background: linear-gradient(135deg, #818cf8 0%, #06b6d4 100%);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  transform: scale(1.05) translateY(-4px);
+  background: var(--ifm-color-primary-dark);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
 }
 
 .cart-badge {
@@ -328,40 +373,41 @@
 
 /* Dark mode adjustments */
 [data-theme="dark"] .merch-hero {
-  background: linear-gradient(
-    135deg,
-    #5b47d6 0%,
-    #4338ca 100%
-  ) !important;
+  background: var(--ifm-background-color) !important;
+  border-bottom-color: var(--dark-border);
 }
 
 [data-theme="dark"] .info-card {
-  background: var(--ifm-background-surface-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--dark-card-bg);
+  border: 1px solid var(--dark-border);
 }
 
 [data-theme="dark"] .info-card-highlighted {
-  background: #1a1a1a;
-  border: 2px solid #333333;
+  background: rgba(17, 24, 39, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 [data-theme="dark"] .info-card-highlighted:hover {
-  background: #2a2a2a;
-  border-color: #ffffff;
-  box-shadow: 0 12px 24px rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.8);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 12px 24px rgba(37, 194, 160, 0.15);
+}
+
+[data-theme="dark"] .info-card-highlighted h3 {
+  color: var(--dark-text-primary);
 }
 
 [data-theme="dark"] .info-card-highlighted:hover h3 {
-  color: #ffffff;
+  color: var(--ifm-color-primary-light);
 }
 
 [data-theme="dark"] .stat-item-highlighted {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-300);
 }
 
 [data-theme="dark"] .stat-item-highlighted:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+  background: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
