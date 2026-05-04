@@ -90,7 +90,7 @@ const blogs: Blog[] = [
     tags: ["Microsoft", "Azure", "Data Engineering", "Certification"],
   },
   {
-    id: 8,
+    id: 9,
     title: "How SSO Actually Works",
     image: "/img/blogs/sso_cover.png",
     description:
