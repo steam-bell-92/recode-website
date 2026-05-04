@@ -90,6 +90,17 @@ const blogs: Blog[] = [
     tags: ["Microsoft", "Azure", "Data Engineering", "Certification"],
   },
   {
+    id: 9,
+    title: "How SSO Actually Works",
+    image: "/img/blogs/sso_cover.png",
+    description:
+      "SSO lets you log into dozens of apps with a single set of credentials. But how does it actually work under the hood? A beginner-friendly walkthrough of the full flow — from clicking 'Sign in with Google' to getting access — step by step.",
+    slug: "single-sign-on",
+    authors: ["Aditya-Singh-Rathore", "sanjay-kv"],
+    category: "security",
+    tags: ["SSO", "Authentication", "Security", "OAuth", "OpenID Connect", "SAML"],
+  },
+  {
     id: 8,
     title: "Microsoft Fabric: One Platform, One Lake, Every Data Workload",
     image: "/img/blogs/microsoft-farbic-blog-image.png",
