@@ -112,7 +112,7 @@ const blogs: Blog[] = [
     tags: ["Microsoft", "Azure", "Data Engineering", "Certification", "Fabric", "OneLake", "Data Workloads", "Unified Analytics"],
   },
   {
-    id:10,
+    id: 10,
     title: "Lakehouse vs Data Warehouse: A Comprehensive Comparison",
     image: "/img/blogs/datalake_vs_warehouse.png",
     description:
@@ -121,6 +121,17 @@ const blogs: Blog[] = [
     authors: ["Aditya-Singh-Rathore"],
     category: "data engineering",
     tags: ["Lakehouse", "Data Warehouse", "Data Storage", "Big Data", "Architecture", "Comparison"],
+  },
+  {
+    id: 11,
+    title: "How Netflix Handles 2 Trillion Events Every Day",
+    image: "/img/blogs/thumbnail.png",
+    description:
+      "Netflix processes an enormous amount of data every day, handling over 2 trillion events. This article explores how they manage this massive scale and the technologies they use to ensure smooth operations.",
+    slug: "netflix-data-engineering",
+    authors: ["Aditya-Singh-Rathore"],
+    category: "data engineering",
+    tags: ["Netflix", "Data Processing", "Big Data", "Scalability", "Event Handling", "Technology", "Architecture", "Data Engineering"],
   },
 ];
 
