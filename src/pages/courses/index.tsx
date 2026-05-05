@@ -123,25 +123,6 @@ const courses = [
   },
 ];
 
-const projectReviews = [
-  {
-    img: "https://dummyimage.com/100x100/222/fff&text=AP",
-    name: "Abhi Patel",
-    review:
-      "Excited to share the Spotify End to End ETL pipeline project using AWS and Python...",
-  },
-  {
-    img: "https://dummyimage.com/100x100/333/fff&text=AM",
-    name: "Ajosh Mungesan",
-    review: "Learning & sharing my Spotify ETL project using Python & AWS...",
-  },
-  {
-    img: "https://dummyimage.com/100x100/444/fff&text=HR",
-    name: "Hariharan R",
-    review:
-      "Excited to share the Spotify End to End ETL pipeline project using AWS and Python...",
-  },
-];
 
 const topics = [
   "ETL",
@@ -893,37 +874,7 @@ function CoursesContent() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              Project reviews from students
             </motion.h2>
-            <div className="courses-grid courses-grid-3 mb-8 md:mb-12">
-              {projectReviews.map((review, idx) => (
-                <motion.div
-                  key={idx}
-                  className="courses-card group flex cursor-pointer flex-col items-center text-center"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
-                  onClick={() => handleInfo(review.review)}
-                >
-                  <div className="relative mb-4 h-16 w-16 md:mb-6 md:h-20 md:w-20">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 opacity-50 blur-md transition-opacity duration-300 group-hover:opacity-70" />
-                    <img
-                      src={review.img}
-                      alt={review.name}
-                      className="relative z-10 h-full w-full rounded-full border-3 border-green-400 object-cover shadow-lg transition-all duration-300 group-hover:border-green-300"
-                    />
-                  </div>
-                  <h4 className="courses-heading-4 courses-text-gradient mb-3 md:mb-4">
-                    {review.name}
-                  </h4>
-                  <p className="courses-body-small courses-text-secondary line-clamp-4 text-center leading-relaxed">
-                    {review.review}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
           </div>
         </section>
 
