@@ -1388,6 +1388,72 @@ html {
   box-sizing: border-box !important;
 }
 
+.algolia-sitesearch-navbar {
+  display: flex !important;
+  align-items: center !important;
+  padding: 0.2rem 0.3rem !important;
+}
+
+.algolia-sitesearch-navbar #algolia-sitesearch-navbar {
+  display: flex;
+  align-items: center;
+}
+
+.algolia-sitesearch-navbar .sitesearch-button {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  box-sizing: border-box !important;
+  width: 250px;
+  height: 36px !important;
+  min-width: 250px !important;
+  padding: 0 12px 0 48px !important;
+  line-height: 1 !important;
+  transform: none !important;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.algolia-sitesearch-navbar .sitesearch-button:hover {
+  transform: none !important;
+}
+
+.algolia-sitesearch-navbar .sitesearch-button .search-icon {
+  position: absolute !important;
+  top: 50% !important;
+  left: 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  line-height: 0 !important;
+  pointer-events: none;
+  transform: translateY(-50%) !important;
+}
+
+.algolia-sitesearch-navbar .sitesearch-button .search-icon svg {
+  display: block;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+}
+
+.algolia-sitesearch-navbar .sitesearch-button .button-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+}
+
+.algolia-sitesearch-navbar .sitesearch-button .keyboard-shortcut {
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
 [data-theme="dark"] .explore-btn:hover {
   color: white;
 }
