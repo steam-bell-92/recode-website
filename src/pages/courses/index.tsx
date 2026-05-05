@@ -56,10 +56,10 @@ const projects = [
 
 const testimonials = [
   {
-    img: "https://dummyimage.com/80x80/222/fff&text=A",
-    name: "Anonymous",
+    img: "https://dummyimage.com/80x80/222/fff&text=KP",
+    name: "Kumar Priyanshu",
     review:
-      "The resources for learning statistics were really useful . Also I liked the summary of each field given out there .",
+      "I was thoroughly impressed by his clear, engaging communication and deep understanding of my issue. He listened attentively and offered valuable insights and solutions, leaving me extremely satisfied and confident in the guidance I received.",
     stars: 5,
   },
   {
@@ -70,10 +70,10 @@ const testimonials = [
     stars: 5,
   },
   {
-    img: "https://dummyimage.com/80x80/444/fff&text=JS",
-    name: "Jatan Sanghvi",
+    img: "https://dummyimage.com/80x80/444/fff&text=S",
+    name: "Sachin",
     review:
-      "Amazing experience and worth the time",
+      "Sanjay has been a great support in knowing various career paths and upcoming tech. The call was very crisp but valueable at the same time. For sure I am gonna schedule a call probably next month to give him updates. Thanks a ton Sanjay :)",
     stars: 5,
   },
 ];
