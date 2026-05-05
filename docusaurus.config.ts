@@ -7,6 +7,24 @@ dotenv.config();
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+const algoliaAppId = process.env.ALGOLIA_APP_ID?.trim();
+const algoliaSearchApiKey = process.env.ALGOLIA_SEARCH_API_KEY?.trim();
+const algoliaIndexName = process.env.ALGOLIA_INDEX_NAME?.trim();
+
+const hasAlgoliaSiteSearch = Boolean(
+  algoliaAppId && algoliaSearchApiKey && algoliaIndexName,
+);
+
+const hasPartialAlgoliaSiteSearchConfig = Boolean(
+  algoliaAppId || algoliaSearchApiKey || algoliaIndexName,
+);
+
+if (hasPartialAlgoliaSiteSearchConfig && !hasAlgoliaSiteSearch) {
+  console.warn(
+    "Algolia SiteSearch is partially configured. Set ALGOLIA_APP_ID, ALGOLIA_SEARCH_API_KEY, and the actual Algolia index name in ALGOLIA_INDEX_NAME to enable navbar search.",
+  );
+}
+
 const config: Config = {
   title: "recode hive",
   tagline: "Learn, Build & Grow with Open Source",
@@ -206,11 +224,6 @@ const config: Config = {
             },
           ],
         },
-        // Search disabled until Algolia is properly configured
-        // {
-        //   type: "search",
-        //   position: "right",
-        // },
         {
           type: "html",
           position: "right",
@@ -245,21 +258,6 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
-    // Disable Algolia search until properly configured
-    // algolia: {
-    //   appId: "YOUR_APP_ID",
-    //   apiKey: "YOUR_SEARCH_API_KEY",
-    //   indexName: "YOUR_INDEX_NAME",
-    //   contextualSearch: true,
-    //   externalUrlRegex: "external\\.com|domain\\.com",
-    //   replaceSearchResultPathname: {
-    //     from: "/docs/",
-    //     to: "/",
-    //   },
-    //   searchParameters: {},
-    //   searchPagePath: "search",
-    //   insights: false,
-    // },
   } satisfies Preset.ThemeConfig,
 
   markdown: {
@@ -296,6 +294,13 @@ const config: Config = {
     EMAILJS_PUBLIC_KEY: process.env.EMAILJS_PUBLIC_KEY || "",
     EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID || "",
     EMAILJS_TEMPLATE_ID: process.env.EMAILJS_TEMPLATE_ID || "",
+    algoliaSiteSearch: hasAlgoliaSiteSearch
+      ? {
+          applicationId: algoliaAppId,
+          apiKey: algoliaSearchApiKey,
+          indexName: algoliaIndexName,
+        }
+      : null,
     hooks: {
       onBrokenMarkdownLinks: "warn",
     },
